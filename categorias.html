@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        /* Variables y diseño base */
+        /* Variables y diseño base Sierras Web */
         :root {
             --primary-color: #0284C7; 
             --primary-dark: #0369A1;
@@ -22,7 +22,7 @@
             --nav-bg: rgba(255, 255, 255, 0.85);
             --border-color: #E2E8F0;
             --pattern-color: #cbd5e1;
-            --star-color: #F59E0B;
+            --star-color: #F59E0B; /* Único amarillo para las estrellas y el sol */
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -99,14 +99,15 @@
         .pro-rating .ops { color: var(--text-gray); }
 
         .pro-location { font-size: 0.9rem; color: var(--text-gray); margin-bottom: 12px; }
-        .pro-location i { color: var(--star-color); margin-right: 5px; }
+        .pro-location i { color: var(--primary-color); margin-right: 5px; }
 
+        /* Estilo de etiquetas Sierras Web */
         .pro-tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .pro-tag { 
-            background: rgba(245, 158, 11, 0.1); color: #d97706; border: 1px solid #fcd34d;
+            background: var(--primary-light); color: var(--primary-dark); border: 1px solid rgba(2, 132, 199, 0.2);
             padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
         }
-        [data-theme="dark"] .pro-tag { background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.3); color: #fbbf24;}
+        [data-theme="dark"] .pro-tag { background: rgba(2, 132, 199, 0.2); border-color: rgba(2, 132, 199, 0.4); color: #38bdf8;}
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -126,10 +127,21 @@
     <!-- Navegación -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Todo<span>Oficio</span></a>
+            <a href="#" class="logo">Oficios <span>Sierras Web</span></a>
             <button id="theme-toggle-mobile" class="theme-toggle theme-toggle-mobile" style="display: none;" aria-label="Cambiar Tema">
                 <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle></svg>
+                <!-- Sol corregido con rayos -->
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
             </button>
             <ul class="nav-links">
                 <li><a href="#">Inicio</a></li>
@@ -138,7 +150,18 @@
                 <li>
                     <button id="theme-toggle" class="theme-toggle">
                         <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle></svg>
+                        <!-- Sol corregido con rayos -->
+                        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
                     </button>
                 </li>
             </ul>
@@ -168,7 +191,8 @@
             <!-- Contenedor de Tarjetas (Grid) -->
             <div id="professionalsContainer">
                 <div class="text-center py-5" style="grid-column: 1 / -1;">
-                    <div class="spinner-border" style="color: var(--star-color);" role="status"></div>
+                    <!-- Spinner con color primario (azul Sierras Web) -->
+                    <div class="spinner-border" style="color: var(--primary-color);" role="status"></div>
                     <p style="color: var(--text-gray);" class="mt-3">Buscando profesionales disponibles...</p>
                 </div>
             </div>
@@ -179,7 +203,7 @@
     <!-- Footer -->
     <footer style="padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color); background: var(--white);">
         <div class="container">
-            <a href="#" class="logo" style="font-size: 1.5rem;">Todo<span>Oficio</span></a>
+            <a href="#" class="logo" style="font-size: 1.5rem;">Oficios <span>Sierras Web</span></a>
             <p style="margin: 10px 0 5px; color: var(--text-gray);">Desarrollo y Diseño Web Profesional.</p>
             <p style="font-size: 0.85rem; color: var(--text-gray); opacity: 0.8;">&copy; 2026 Sierras Web. Todos los derechos reservados.</p>
         </div>
