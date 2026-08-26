@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Perfil Profesional - Plantilla</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CDNs de Estilos (Bootstrap, Iconos, Galerías) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.css" />
+
+    <style>
+        /* Variables - Sistema de diseño */
+        :root {
+            --primary: #F2C94C;
+            --primary-hover: #e0b840;
+            --dark: #1a1a1a;
+            --gray: #6c757d;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --success: #22c55e;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --transition: all 0.3s ease;
+        }
+
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        body { background-color: var(--light-bg); }
+        
+        /* Header simplificado */
+        .header { background: var(--dark); padding: 15px 0; }
+        .header .logo { color: var(--primary); font-weight: 800; font-size: 24px; text-decoration: none; }
+        .nav-link { color: white !important; }
+
+        /* ========== BREADCRUMBS ========== */
+        .breadcrumbs-profile { background: var(--white); border-bottom: 1px solid #eef0f2; padding: 15px 0;}
+        .breadcrumbs-profile .container { display: flex; align-items: center; gap: 14px; }
+        .breadcrumbs-profile ol { flex: 1; display: flex; justify-content: center; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; gap: 10px; }
+        
+        .profile-back-btn {
+            display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px 10px 14px;
+            background: var(--dark); color: #fff; font-weight: 800; font-size: 14.5px; border-radius: 999px; text-decoration: none; transition: var(--transition);
+        }
+        .profile-back-btn:hover { background: var(--primary); color: var(--dark); }
+        .breadcrumbs-profile ol li { color: var(--gray); font-weight: 600; font-size: 13.5px; }
+        .breadcrumbs-profile ol li a { color: var(--gray); text-decoration: none; opacity: 0.85; }
+        .breadcrumbs-profile ol li + li::before { content: "/"; margin-right: 10px; opacity: 0.4; }
+
+        /* ========== CONTENIDO PRINCIPAL ========== */
+        .profile-section {
+            background: radial-gradient(120% 360px at 50% -60px, rgba(242,201,76,0.12), rgba(242,201,76,0) 70%), var(--white);
+            padding: 26px 0 80px; min-height: 60vh;
+        }
+        .profile-wrap { max-width: 760px; margin: 0 auto; }
+        .profile-main-card { background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); text-align: center; padding: 40px 30px; }
+        
+        /* Avatar */
+        .profile-avatar-ring {
+            display: inline-block; border-radius: 50%; padding: 5px; background: conic-gradient(from 140deg, #F2C94C, #F7DD8A, #F2C94C);
+            box-shadow: 0 0 0 6px var(--white), 0 18px 44px rgba(0,0,0,0.14); margin-bottom: 20px;
+        }
+        .profile-avatar { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--white); object-fit: cover; background: var(--white); }
+        
+        .profile-name { font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+        .profile-service-name { font-size: 16px; color: var(--gray); margin-bottom: 8px; }
+        .profile-location { font-size: 14px; color: var(--gray); margin-bottom: 16px; }
+        .profile-location i { color: var(--primary); }
+        
+        /* Verified Badge */
+        .profile-verified {
+            display: inline-flex; align-items: center; gap: 7px; margin: 4px 0 14px; padding: 7px 16px;
+            border-radius: 30px; font-size: 13.5px; font-weight: 700; color: #1769d6;
+            background: rgba(23,105,214,0.10); border: 1px solid rgba(23,105,214,0.22);
+        }
+
+        /* Botones Acción */
+        .whatsapp-btn {
+            background: var(--success); color: white; padding: 16px 32px; font-size: 16px; font-weight: 700;
+            border-radius: var(--radius-md); display: inline-flex; align-items: center; gap: 10px; text-decoration: none; width: 100%; max-width: 320px; justify-content: center; margin: 10px auto;
+        }
+        .whatsapp-btn:hover { background: #1dad5c; color: white; }
+        .share-profile-btn {
+            background: var(--white); color: #1d2129; border: 2px solid #e2e5ea; padding: 13px 32px;
+            font-size: 15px; font-weight: 700; border-radius: var(--radius-md); display: inline-flex; align-items: center; gap: 10px; cursor: pointer; width: 100%; max-width: 320px; justify-content: center; margin: 10px auto;
+        }
+        .share-profile-btn:hover { border-color: var(--primary); background: #fffdf5; }
+
+        /* TABS */
+        .profile-tabs {
+            display: flex; gap: 8px; margin: 24px 0 0; padding: 8px; background: linear-gradient(180deg, #f4f5f7 0%, #eceef1 100%);
+            border: 1px solid #e3e6ea; border-radius: 18px; overflow-x: auto;
+        }
+        .ptab {
+            flex: 1 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+            border: 1px solid #e0e3e8; background: #fff; color: var(--gray); font-weight: 700; font-size: 14.5px;
+            padding: 11px 18px; border-radius: 12px; cursor: pointer; transition: var(--transition);
+        }
+        .ptab.active { background: var(--primary); color: var(--dark); border-color: #e0b840; }
+        .ptab-panel { display: none; }
+        .ptab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Info Card */
+        .info-card { background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: 32px; margin-top: 24px; border: 2px solid transparent; }
+        
+        /* Galería */
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .gallery-item { aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Mobile Sticky WhatsApp */
+        .wpp-sticky-bar { display: none; }
+        @media (max-width: 768px) {
+            .wpp-sticky-bar { display: block; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 1070; }
+            .wpp-sticky-bar .whatsapp-sticky { width: 100%; max-width: none; box-shadow: 0 8px 24px rgba(34,197,94,0.40); margin: 0; }
+            body { padding-bottom: 90px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="#" class="logo">MiOficio</a>
+            <nav class="d-none d-lg-flex gap-3">
+                <a href="#" class="nav-link">Inicio</a>
+                <a href="#" class="nav-link">Servicios</a>
+                <a href="#" class="nav-link btn btn-warning text-dark px-3 rounded-pill fw-bold">Registrarse</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs-profile" style="background: var(--primary);">
+        <div class="container">
+            <a href="#" class="profile-back-btn"><i class="bi bi-arrow-left"></i><span>Volver</span></a>
+            <ol>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li>Mantenimiento del hogar</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="profile-section">
+        <div class="container profile-wrap">
+            
+            <!-- Tarjeta Principal -->
+            <div class="profile-main-card">
+                <div class="profile-avatar-ring">
+                    <!-- Cambia esta URL por la imagen de tu proveedor -->
+                    <img src="https://ui-avatars.com/api/?name=Diego+M&size=150&background=random" alt="Avatar" class="profile-avatar">
+                </div>
+                
+                <h1 class="profile-name">Diego Maiorkevich</h1>
+                <p class="profile-service-name">Mantenimiento del hogar</p>
+                <p class="profile-location"><i class="fas fa-map-marker-alt"></i> Capital - Mendoza</p>
+                
+                <div class="profile-verified">
+                    <i class="bi bi-patch-check-fill"></i> Profesional verificado
+                </div>
+
+                <div class="d-flex justify-content-center gap-1 text-warning fs-5 mb-3">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+
+                <!-- Botones -->
+                <a href="https://wa.me/5492615576762" target="_blank" class="whatsapp-btn">
+                    <i class="bi bi-whatsapp"></i> Contactar por WhatsApp
+                </a>
+                <button class="share-profile-btn" onclick="alert('Funcionalidad de compartir')">
+                    <i class="bi bi-share-fill"></i> Compartir perfil
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="profile-tabs">
+                <button class="ptab active" data-tab="descripcion"><i class="bi bi-info-circle-fill"></i> Descripción</button>
+                <button class="ptab" data-tab="servicios"><i class="bi bi-grid-fill"></i> Servicios</button>
+                <button class="ptab" data-tab="galeria"><i class="bi bi-images"></i> Galería</button>
+            </div>
+
+            <!-- Contenido de los Tabs -->
+            <div class="ptab-panels">
+                
+                <!-- Descripción -->
+                <div class="ptab-panel active" id="descripcion">
+                    <div class="info-card">
+                        <h3 class="mb-3"><i class="bi bi-info-circle text-warning"></i> Sobre el servicio</h3>
+                        <p>Lo que se entiende por mantenimiento del hogar incluye a varios rubros, tales como electricidad, plomería, gas, aire acondicionado, pintura, electrónica, y otros.</p>
+                    </div>
+                </div>
+
+                <!-- Servicios -->
+                <div class="ptab-panel" id="servicios">
+                    <div class="info-card">
+                        <h3 class="mb-3">Mantenimiento del hogar</h3>
+                        <p class="text-muted">Rubros y especialidades en las que trabaja:</p>
+                        <ul class="list-unstyled">
+                            <li>✔️ Electricista</li>
+                            <li>✔️ Plomería</li>
+                            <li>✔️ Gasista</li>
+                            <li>✔️ Aire acondicionado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Galería -->
+                <div class="ptab-panel" id="galeria">
+                    <div class="info-card">
+                        <div class="gallery-grid">
+                            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=300&q=80" alt="Trabajo"></div>
+                            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=300&q=80" alt="Trabajo"></div>
+                            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=300&q=80" alt="Trabajo"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Botón Flotante Mobile -->
+    <div class="wpp-sticky-bar">
+        <a href="https://wa.me/5492615576762" class="whatsapp-btn whatsapp-sticky">
+            <i class="bi bi-whatsapp"></i> Contactar
+        </a>
+    </div>
+
+    <!-- Scripts Esenciales -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        // Lógica para cambiar de pestañas (Tabs)
+        document.querySelectorAll('.ptab').forEach(button => {
+            button.addEventListener('click', () => {
+                // Quitar clase active de todos los botones y paneles
+                document.querySelectorAll('.ptab').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.ptab-panel').forEach(panel => panel.classList.remove('active'));
+                
+                // Activar el seleccionado
+                button.classList.add('active');
+                document.getElementById(button.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
