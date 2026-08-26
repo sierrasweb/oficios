@@ -239,15 +239,13 @@
                     <div class="info-card">
                         <h3 class="mb-4"><i class="bi bi-chat-dots text-warning"></i> Reseñas de clientes</h3>
                         
-                        <!-- Lista de reseñas de ejemplo -->
-                        <div class="review-card mb-4 p-3 border rounded shadow-sm">
-                            <div class="d-flex align-items-center mb-2">
-                                <!-- Iniciales del usuario simuladas -->
-                                <div class="avatar-initials text-white rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 45px; height: 45px; font-weight: bold; background-color: #198754;">ZS</div>
-                                <div>
-                                    <h5 class="mb-0 fs-6 fw-bold">Zurevich SAS</h5>
-                                    <small class="text-muted">29 de Mayo, 2026</small>
-                                </div>
+<!-- Aquí se cargarán las reseñas automáticamente -->
+<div id="reviewsContainer">
+    <div class="text-center py-4">
+        <div class="spinner-border text-warning" role="status"></div>
+        <p class="text-muted mt-2">Cargando reseñas...</p>
+    </div>
+</div>
                             </div>
                             <div class="text-warning mb-2" style="font-size: 14px;">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -407,6 +405,76 @@
                 submitBtn.disabled = false;
             });
         });
+        // Función para cargar y mostrar las reseñas desde Google Sheets
+function loadReviews() {
+    const container = document.getElementById('reviewsContainer');
+
+    fetch(GOOGLE_SCRIPT_URL)
+    .then(response => response.json())
+    .then(data => {
+        if(data.resultado === 'exito') {
+            const reviews = data.datos;
+            
+            if(reviews.length === 0) {
+                container.innerHTML = '<p class="text-muted text-center py-4">Aún no hay reseñas. ¡Sé el primero en opinar!</p>';
+                return;
+            }
+
+            let html = '';
+            reviews.forEach(review => {
+                // Formatear la fecha y hora a formato local
+                let fechaObj = new Date(review.fecha);
+                let fechaStr = isNaN(fechaObj) ? review.fecha : fechaObj.toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' });
+
+                // Crear iniciales para el avatar (ej. Juan = JU)
+                let iniciales = review.nombre.substring(0, 2).toUpperCase();
+
+                // Generar las estrellas de 1 a 5
+                let estrellasHtml = '';
+                let rating = parseInt(review.puntuacion) || 0;
+                for(let i = 1; i <= 5; i++) {
+                    if(i <= rating) {
+                        estrellasHtml += '<i class="fas fa-star"></i>';
+                    } else {
+                        estrellasHtml += '<i class="far fa-star"></i>';
+                    }
+                }
+
+                // Armar la tarjeta de la reseña
+                html += `
+                <div class="review-card mb-4 p-3 border rounded shadow-sm">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="text-white rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 45px; height: 45px; font-weight: bold; background-color: #198754;">${iniciales}</div>
+                        <div>
+                            <h5 class="mb-0 fs-6 fw-bold">${review.nombre}</h5>
+                            <small class="text-muted">${fechaStr}</small>
+                        </div>
+                    </div>
+                    <div class="text-warning mb-2" style="font-size: 14px;">
+                        ${estrellasHtml}
+                    </div>
+                    <p class="mb-0 text-secondary">${review.resena}</p>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        } else {
+            container.innerHTML = '<p class="text-danger">Error al cargar las reseñas.</p>';
+        }
+    })
+    .catch(error => {
+        container.innerHTML = '<p class="text-danger">No se pudieron cargar las reseñas. Verifica tu conexión.</p>';
+    });
+}
+
+// Cargar las reseñas apenas se abre la página
+document.addEventListener('DOMContentLoaded', loadReviews);
+
+// También actualizamos la lista si el usuario envía una nueva reseña
+// Busca en tu código anterior el fetch(GOOGLE_SCRIPT_URL, { method: 'POST'...
+// y dentro de la respuesta exitosa (donde dice alert('¡Gracias por tu reseña...'))
+// agrega esta línea para que se recargue la lista de inmediato:
+// loadReviews();
     </script>
 </body>
 </html>
