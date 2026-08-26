@@ -167,6 +167,7 @@
         /* --- GALERÍA --- */
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .gallery-item { aspect-ratio: 1; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);}
+        .gallery-item a { display: block; width: 100%; height: 100%; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .gallery-item:hover img { transform: scale(1.1); }
 
@@ -190,14 +191,10 @@
         .footer-logo span { color: var(--primary-color); }
         .footer-copyright { font-size: 0.85rem; margin-top: 20px; opacity: 0.8; }
 
-        /* Mobile Sticky WhatsApp */
-        .wpp-sticky-bar { display: none; }
+        /* --- Ajustes Mobile --- */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .theme-toggle-mobile { display: flex !important; position: absolute; right: 20px; top: 19px; }
-            .wpp-sticky-bar { display: block; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 1070; }
-            .wpp-sticky-bar .whatsapp-sticky { width: 100%; max-width: none; box-shadow: 0 8px 24px rgba(37,211,102,0.40); margin: 0; }
-            body { padding-bottom: 90px; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
@@ -312,9 +309,21 @@
                 <div class="ptab-panel" id="galeria">
                     <div class="info-card">
                         <div class="gallery-grid">
-                            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=300&q=80" alt="Trabajo"></div>
-                            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=300&q=80" alt="Trabajo"></div>
-                            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=300&q=80" alt="Trabajo"></div>
+                            <div class="gallery-item">
+                                <a href="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1200&q=80">
+                                    <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=300&q=80" alt="Trabajo">
+                                </a>
+                            </div>
+                            <div class="gallery-item">
+                                <a href="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80">
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=300&q=80" alt="Trabajo">
+                                </a>
+                            </div>
+                            <div class="gallery-item">
+                                <a href="https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=1200&q=80">
+                                    <img src="https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=300&q=80" alt="Trabajo">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -387,15 +396,11 @@
         </div>
     </footer>
 
-    <!-- Botón Flotante Mobile -->
-    <div class="wpp-sticky-bar">
-        <a href="https://wa.me/5492615576762" class="whatsapp-btn whatsapp-sticky">
-            <i class="bi bi-whatsapp"></i> Contactar
-        </a>
-    </div>
 
     <!-- Scripts Esenciales -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js"></script>
+    
     <script>
         // --- LOGICA MODO OSCURO (SIERRAS WEB) ---
         const htmlElement = document.documentElement;
@@ -565,6 +570,19 @@
             }).catch(() => container.innerHTML = '<p class="text-danger">Error de conexión.</p>');
         }
         document.addEventListener('DOMContentLoaded', loadReviews);
+
+        // --- LÓGICA GALERÍA MAGNIFIC POPUP ---
+        $(document).ready(function() {
+            $('.gallery-grid').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0,1]
+                }
+            });
+        });
     </script>
 </body>
 </html>
