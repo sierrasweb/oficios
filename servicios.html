@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Perfil Profesional - Plantilla con Reseñas</title>
+    <title>Perfil Profesional - TodoOficio</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -255,44 +255,44 @@
                             <p class="mb-0 text-secondary">Muy predispuesto y amable. Realizó el trabajo tal cual lo conversamos y a buen precio. Lo recomiendo.</p>
                         </div>
 
-                        <!-- Formulario para dejar nueva opinión -->
+                        <!-- Formulario para dejar nueva opinión (Actualizado con Teléfono) -->
                         <div class="mt-4 pt-4 border-top">
                             <h4 class="fs-5 fw-bold mb-3">Dejá tu opinión</h4>
                             <p class="text-muted small mb-4">Tu dirección de correo electrónico no será publicada.</p>
                             
                             <form id="reviewForm">
-    <div class="row g-3 mb-3">
-        <div class="col-md-4">
-            <input type="text" id="formNombre" class="form-control bg-light" placeholder="Tu nombre *" required>
-        </div>
-        <div class="col-md-4">
-            <input type="email" id="formEmail" class="form-control bg-light" placeholder="Tu email *" required>
-        </div>
-        <div class="col-md-4">
-            <input type="tel" id="formTelefono" class="form-control bg-light" placeholder="Tu teléfono *" required>
-        </div>
-    </div>
-    <div class="mb-3">
-        <textarea id="formResena" class="form-control bg-light" rows="4" placeholder="Escribí tu experiencia con este profesional *" required></textarea>
-    </div>
-    
-    <div class="mb-4 d-flex align-items-center gap-3">
-        <label class="fw-bold mb-0">Tu puntuación:</label>
-        <div class="star-rating text-muted fs-3" style="cursor: pointer; color: #ddd;">
-            <i class="far fa-star" data-rating="1"></i>
-            <i class="far fa-star" data-rating="2"></i>
-            <i class="far fa-star" data-rating="3"></i>
-            <i class="far fa-star" data-rating="4"></i>
-            <i class="far fa-star" data-rating="5"></i>
-        </div>
-        <!-- Input oculto para guardar la calificación -->
-        <input type="hidden" id="ratingValue" value="0" required>
-    </div>
-    
-    <button type="submit" class="btn btn-warning fw-bold px-4 py-3 w-100 rounded-3 shadow-sm">
-        Publicar opinión
-    </button>
-</form>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-4">
+                                        <input type="text" id="formNombre" class="form-control bg-light" placeholder="Tu nombre *" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="email" id="formEmail" class="form-control bg-light" placeholder="Tu email *" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="tel" id="formTelefono" class="form-control bg-light" placeholder="Tu teléfono *" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <textarea id="formResena" class="form-control bg-light" rows="4" placeholder="Escribí tu experiencia con este profesional *" required></textarea>
+                                </div>
+                                
+                                <div class="mb-4 d-flex align-items-center gap-3">
+                                    <label class="fw-bold mb-0">Tu puntuación:</label>
+                                    <div class="star-rating text-muted fs-3" style="cursor: pointer; color: #ddd;">
+                                        <i class="far fa-star" data-rating="1"></i>
+                                        <i class="far fa-star" data-rating="2"></i>
+                                        <i class="far fa-star" data-rating="3"></i>
+                                        <i class="far fa-star" data-rating="4"></i>
+                                        <i class="far fa-star" data-rating="5"></i>
+                                    </div>
+                                    <!-- Input oculto para guardar la calificación -->
+                                    <input type="hidden" id="ratingValue" value="0" required>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-warning fw-bold px-4 py-3 w-100 rounded-3 shadow-sm">
+                                    Publicar opinión
+                                </button>
+                            </form>
                         </div>
 
                     </div>
@@ -329,17 +329,14 @@
         let currentRating = 0;
 
         stars.forEach(star => {
-            // Al hacer click, fija la calificación
             star.addEventListener('click', (e) => {
                 currentRating = e.target.getAttribute('data-rating');
                 ratingInput.value = currentRating;
                 updateStars(currentRating);
             });
-            // Al pasar el mouse, pre-visualiza
             star.addEventListener('mouseover', (e) => {
                 updateStars(e.target.getAttribute('data-rating'));
             });
-            // Al quitar el mouse, vuelve a la calificación fija
             star.addEventListener('mouseout', () => {
                 updateStars(currentRating);
             });
@@ -357,17 +354,58 @@
             });
         }
 
-        // Simular el envío del formulario
+        // --- CONEXIÓN CON GOOGLE SHEETS ---
+        
+        // REEMPLAZA ESTA URL CON LA QUE TE DIO GOOGLE APPS SCRIPT
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwX87Outr4bvd-ubNVsD2GwUbhcjMgvYGJxy477jcOrAcTsQgPHasZKLEpZ8e8FvI90/exec';
+
         document.getElementById('reviewForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            
             if (ratingInput.value == 0) {
                 alert("Por favor, selecciona una puntuación en estrellas.");
                 return;
             }
-            alert('¡Gracias por tu reseña! En un entorno real, esto se guardaría en la base de datos.');
-            e.target.reset(); // Limpia el formulario
-            currentRating = 0;
-            updateStars(0); // Resetea las estrellas
+
+            // Cambia el texto del botón mientras carga
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = 'Enviando...';
+            submitBtn.disabled = true;
+
+            // Recolectar los datos de los inputs usando sus IDs
+            const formData = new URLSearchParams();
+            formData.append('nombre', document.getElementById('formNombre').value);
+            formData.append('email', document.getElementById('formEmail').value);
+            formData.append('telefono', document.getElementById('formTelefono').value);
+            formData.append('resena', document.getElementById('formResena').value);
+            formData.append('puntuacion', document.getElementById('ratingValue').value);
+
+            // Enviar a Google Sheets
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.resultado === 'exito') {
+                    alert('¡Gracias por tu reseña! Ha sido guardada exitosamente.');
+                    e.target.reset(); // Limpia el formulario
+                    currentRating = 0;
+                    updateStars(0); // Resetea las estrellas
+                } else {
+                    alert('Hubo un problema guardando tu reseña.');
+                }
+            })
+            .catch(error => {
+                alert('Error de conexión. Revisa la consola o inténtalo más tarde.');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Restaurar el botón a su estado original
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+            });
         });
     </script>
 </body>
