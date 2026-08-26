@@ -6,8 +6,9 @@
     <meta name="description" content="Oficios Sierras Web - Encontrá profesionales de confianza para arreglos del hogar y servicios. Solicitá presupuestos gratis y directos sin comisiones.">
     <title>Oficios Sierras Web | Encontrá Profesionales de Confianza</title>
     
-    <!-- Fuentes y AOS Library -->
+    <!-- Fuentes, Iconos y AOS Library -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
@@ -20,7 +21,7 @@
             --text-gray: #475569;
             --bg-light: #F8FAFC;
             --white: #FFFFFF;
-            --nav-bg: rgba(255, 255, 255, 0.85);
+            --nav-bg: rgba(255, 255, 255, 0.90);
             --border-color: #E2E8F0;
             --pattern-color: #cbd5e1;
             --wa-green: #25D366;
@@ -37,7 +38,7 @@
             --text-gray: #94A3B8;
             --bg-light: #0F172A;
             --white: #1E293B;
-            --nav-bg: rgba(30, 41, 59, 0.85);
+            --nav-bg: rgba(30, 41, 59, 0.90);
             --border-color: #334155;
             --pattern-color: #334155;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
@@ -60,20 +61,20 @@
         
         .container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
-        /* --- Navegación Efecto Cristal --- */
+        /* --- NAVEGACIÓN TOTALMENTE REDISEÑADA --- */
         .navbar {
             position: fixed; width: 100%; top: 0; background-color: var(--nav-bg);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             z-index: 1000; border-bottom: 1px solid var(--border-color); 
             transition: all var(--transition-speed);
         }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); text-decoration: none; letter-spacing: -0.5px; transition: transform 0.3s; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); text-decoration: none; letter-spacing: -0.5px; transition: transform 0.3s; z-index: 1001;}
         .logo:hover { transform: scale(1.05); }
         .logo span { color: var(--primary-color); }
         
-        .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-gray); font-weight: 500; font-size: 0.95rem; transition: color 0.3s; position: relative; }
+        .nav-links { display: flex; list-style: none; gap: 1.8rem; align-items: center; margin: 0; transition: all 0.3s ease;}
+        .nav-links a { text-decoration: none; color: var(--text-gray); font-weight: 600; font-size: 0.95rem; position: relative; transition: color 0.3s;}
         .nav-links a::after {
             content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
             background-color: var(--primary-color); transition: width 0.3s ease;
@@ -81,30 +82,43 @@
         .nav-links a:hover { color: var(--primary-color); }
         .nav-links a:hover::after { width: 100%; }
         
-        .nav-links .btn-nav { background-color: var(--primary-color); color: #fff; padding: 10px 22px; border-radius: 8px; font-weight: 600; box-shadow: var(--shadow-sm); transition: all 0.3s; }
+        .nav-links .btn-nav { background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 600; box-shadow: var(--shadow-sm); transition: all 0.3s; }
         .nav-links .btn-nav::after { display: none; }
         .nav-links .btn-nav:hover { background-color: var(--primary-dark); color: #fff; transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-        /* --- Theme Toggle --- */
+        .nav-actions { display: flex; align-items: center; gap: 15px; z-index: 1001; }
+        .menu-toggle { display: none; font-size: 1.6rem; color: var(--text-dark); cursor: pointer; transition: color 0.3s; }
+        
+        /* Botón Modo Oscuro */
         .theme-toggle {
             background: var(--bg-light); border: 1px solid var(--border-color); cursor: pointer;
             width: 42px; height: 42px; border-radius: 50%; transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center;
-            position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
         }
         .theme-toggle:hover { background-color: var(--border-color); box-shadow: var(--shadow-sm); }
-        
-        .theme-toggle svg {
-            position: absolute;
-            width: 20px; height: 20px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
+        .theme-toggle svg { position: absolute; width: 20px; height: 20px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .moon-icon { opacity: 1; transform: translateY(0) rotate(0deg); color: var(--text-gray); }
         .sun-icon { opacity: 0; transform: translateY(30px) rotate(45deg); color: #F59E0B; }
-
         [data-theme="dark"] .moon-icon { opacity: 0; transform: translateY(-30px) rotate(-45deg); }
         [data-theme="dark"] .sun-icon { opacity: 1; transform: translateY(0) rotate(0deg); }
+
+        /* --- Menú Responsive (Tablets y Celulares) --- */
+        @media (max-width: 992px) {
+            .nav-links { gap: 1rem; }
+            .logo { font-size: 1.4rem; }
+        }
+
+        @media (max-width: 860px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: absolute; top: 80px; left: 0; width: 100%;
+                background-color: var(--nav-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+                flex-direction: column; padding: 30px 0; gap: 1.5rem;
+                border-bottom: 1px solid var(--border-color); box-shadow: var(--shadow-md);
+                opacity: 0; visibility: hidden; transform: translateY(-20px);
+            }
+            .nav-links.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
 
         /* --- Hero Section Dinámico --- */
         .hero {
@@ -135,10 +149,7 @@
         }
         .hero p { font-size: 1.2rem; color: var(--text-gray); max-width: 720px; margin: 0 auto 30px; }
 
-        /* Nuevas Insignias Hero */
-        .hero-trust-badges {
-            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px;
-        }
+        .hero-trust-badges { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px; }
         .hero-trust-badge {
             background: var(--white); padding: 8px 18px; border-radius: 20px; 
             font-size: 0.95rem; font-weight: 600; color: var(--text-dark); 
@@ -321,11 +332,9 @@
         @media (max-width: 768px) {
             .hero { padding: 140px 0 70px; }
             .hero h1 { font-size: 2.6rem; }
-            .nav-links { display: none; }
             .about-grid { grid-template-columns: 1fr; }
             .about-img { height: 300px; }
             .domain-box { flex-direction: column; text-align: center; padding: 30px 20px; }
-            .theme-toggle { display: flex; position: absolute; right: 20px; top: 20px; }
             .price-card.featured { transform: scale(1); }
             .price-card.featured:hover { transform: translateY(-5px); }
         }
@@ -337,41 +346,42 @@
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">Oficios <span>Sierras Web</span></a>
-            <ul class="nav-links">
+            
+            <!-- Contenedor de enlaces central -->
+            <ul class="nav-links" id="nav-links">
                 <li><a href="https://oficios.sierrasweb.com.ar/categorias">Categorías</a></li>
                 <li><a href="#como-funciona">Cómo Funciona</a></li>
                 <li><a href="#prestadores">Prestadores</a></li>
-                <li><a href="#planes">Planes Prestadores</a></li>
-                <li><a href="#faq">Preguntas Frecuentes</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="https://wa.me/5492664212722?text=Hola!%20Me%20interesa%20ofrecer%20mis%20servicios%20en%20Oficios%20Sierras%20Web" class="btn-nav" target="_blank">Ofrecer mi Servicio</a></li>
-                
-                <li>
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar Tema">
-                        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                    </button>
-                </li>
             </ul>
+
+            <!-- Acciones Derecha (Modo Oscuro y Hamburguesa) -->
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar Tema">
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <!-- Sol con rayos -->
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
         </div>
     </nav>
-
-    <!-- Botón Theme Toggle Celular -->
-    <button id="theme-toggle-mobile" class="theme-toggle" style="display: none; position: fixed; top: 19px; right: 20px; z-index: 1001; background: var(--nav-bg); border: 1px solid var(--border-color);">
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-    </button>
 
     <!-- Hero Section -->
     <header class="hero">
@@ -389,7 +399,7 @@
                 </div>
                 <a href="https://oficios.sierrasweb.com.ar/categorias" class="btn btn-primary">
                     Explorar Categorías
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="margin-left: 5px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
             </div>
         </div>
@@ -404,8 +414,8 @@
                     <p>Explorá nuestras más de 50 especialidades con profesionales listos para ayudarte.</p>
                 </div>
                 
-                <div class="features-grid" id="categories-grid">
-                    <div class="feature-card" data-category="Plomería" data-aos="fade-up" data-aos-delay="100">
+                <div class="features-grid">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
                         <div>
                             <div class="feature-icon">🔧</div>
                             <h3>Plomería & Destapes</h3>
@@ -417,7 +427,7 @@
                         </div>
                     </div>
 
-                    <div class="feature-card" data-category="Electricidad" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
                         <div>
                             <div class="feature-icon">⚡</div>
                             <h3>Electricidad Matriculada</h3>
@@ -429,7 +439,7 @@
                         </div>
                     </div>
 
-                    <div class="feature-card" data-category="Gas" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
                         <div>
                             <div class="feature-icon">🔥</div>
                             <h3>Gasista Matriculado</h3>
@@ -441,7 +451,7 @@
                         </div>
                     </div>
 
-                    <div class="feature-card" data-category="Pintura" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
                         <div>
                             <div class="feature-icon">🎨</div>
                             <h3>Pintura & Revestimientos</h3>
@@ -453,7 +463,7 @@
                         </div>
                     </div>
 
-                    <div class="feature-card" data-category="Refrigeración" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
                         <div>
                             <div class="feature-icon">❄️</div>
                             <h3>Aire Acondicionado</h3>
@@ -465,7 +475,7 @@
                         </div>
                     </div>
 
-                    <div class="feature-card" data-category="Fletes" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
                         <div>
                             <div class="feature-icon">🚚</div>
                             <h3>Fletes & Mudanzas</h3>
@@ -532,9 +542,9 @@
                     <p>Profesionales recomendados por la comunidad con excelentes calificaciones.</p>
                 </div>
                 
-                <div class="portfolio-grid" id="providers-grid">
+                <div class="portfolio-grid">
                     <!-- Prestador 1 -->
-                    <div class="portfolio-card" data-category="Plomería Gas" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop');">
                             <span class="verified-badge">✓ Verificado</span>
                             <span class="portfolio-badge">Plomería & Gas</span>
@@ -553,7 +563,7 @@
                     </div>
 
                     <!-- Prestador 2 -->
-                    <div class="portfolio-card" data-category="Electricidad" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=800&auto=format&fit=crop');">
                             <span class="verified-badge">✓ Verificado</span>
                             <span class="portfolio-badge">Electricidad</span>
@@ -572,7 +582,7 @@
                     </div>
 
                     <!-- Prestador 3 -->
-                    <div class="portfolio-card" data-category="Refrigeración" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop');">
                             <span class="verified-badge">✓ Verificado</span>
                             <span class="portfolio-badge">Refrigeración</span>
@@ -715,13 +725,8 @@
 
         // Lógica Modo Oscuro / Claro
         const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
         const htmlElement = document.documentElement;
-
-        if (window.innerWidth <= 768) {
-            themeToggleMobileBtn.style.display = 'flex';
-        }
-
+        
         const savedTheme = localStorage.getItem('theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -730,8 +735,7 @@
         }
 
         function toggleTheme() {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
+            if (htmlElement.getAttribute('data-theme') === 'dark') {
                 htmlElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
             } else {
@@ -739,9 +743,31 @@
                 localStorage.setItem('theme', 'dark');
             }
         }
-
         themeToggleBtn.addEventListener('click', toggleTheme);
-        themeToggleMobileBtn.addEventListener('click', toggleTheme);
+
+        // Lógica Menú Hamburguesa (Mobile)
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            if(navLinks.classList.contains('active')){
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            });
+        });
     </script>
 </body>
 </html>
