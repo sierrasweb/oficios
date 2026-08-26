@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Perfil Profesional - Plantilla</title>
+    <title>Perfil Profesional - Plantilla con Reseñas</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,6 +120,10 @@
         .gallery-item { aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* Estrellas interactivas formulario */
+        .star-rating i { transition: transform 0.2s; }
+        .star-rating i:hover { transform: scale(1.2); }
+
         /* Mobile Sticky WhatsApp */
         .wpp-sticky-bar { display: none; }
         @media (max-width: 768px) {
@@ -162,7 +166,6 @@
             <!-- Tarjeta Principal -->
             <div class="profile-main-card">
                 <div class="profile-avatar-ring">
-                    <!-- Cambia esta URL por la imagen de tu proveedor -->
                     <img src="https://ui-avatars.com/api/?name=Diego+M&size=150&background=random" alt="Avatar" class="profile-avatar">
                 </div>
                 
@@ -192,12 +195,13 @@
                 <button class="ptab active" data-tab="descripcion"><i class="bi bi-info-circle-fill"></i> Descripción</button>
                 <button class="ptab" data-tab="servicios"><i class="bi bi-grid-fill"></i> Servicios</button>
                 <button class="ptab" data-tab="galeria"><i class="bi bi-images"></i> Galería</button>
+                <button class="ptab" data-tab="resenas"><i class="bi bi-star-fill"></i> Reseñas</button>
             </div>
 
             <!-- Contenido de los Tabs -->
             <div class="ptab-panels">
                 
-                <!-- Descripción -->
+                <!-- Panel Descripción -->
                 <div class="ptab-panel active" id="descripcion">
                     <div class="info-card">
                         <h3 class="mb-3"><i class="bi bi-info-circle text-warning"></i> Sobre el servicio</h3>
@@ -205,21 +209,21 @@
                     </div>
                 </div>
 
-                <!-- Servicios -->
+                <!-- Panel Servicios -->
                 <div class="ptab-panel" id="servicios">
                     <div class="info-card">
                         <h3 class="mb-3">Mantenimiento del hogar</h3>
                         <p class="text-muted">Rubros y especialidades en las que trabaja:</p>
                         <ul class="list-unstyled">
-                            <li>✔️ Electricista</li>
-                            <li>✔️ Plomería</li>
-                            <li>✔️ Gasista</li>
-                            <li>✔️ Aire acondicionado</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Electricista</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Plomería</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Gasista</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Aire acondicionado</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Galería -->
+                <!-- Panel Galería -->
                 <div class="ptab-panel" id="galeria">
                     <div class="info-card">
                         <div class="gallery-grid">
@@ -227,6 +231,67 @@
                             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=300&q=80" alt="Trabajo"></div>
                             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=300&q=80" alt="Trabajo"></div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Panel Reseñas (NUEVO) -->
+                <div class="ptab-panel" id="resenas">
+                    <div class="info-card">
+                        <h3 class="mb-4"><i class="bi bi-chat-dots text-warning"></i> Reseñas de clientes</h3>
+                        
+                        <!-- Lista de reseñas de ejemplo -->
+                        <div class="review-card mb-4 p-3 border rounded shadow-sm">
+                            <div class="d-flex align-items-center mb-2">
+                                <!-- Iniciales del usuario simuladas -->
+                                <div class="avatar-initials text-white rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 45px; height: 45px; font-weight: bold; background-color: #198754;">ZS</div>
+                                <div>
+                                    <h5 class="mb-0 fs-6 fw-bold">Zurevich SAS</h5>
+                                    <small class="text-muted">29 de Mayo, 2026</small>
+                                </div>
+                            </div>
+                            <div class="text-warning mb-2" style="font-size: 14px;">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="mb-0 text-secondary">Muy predispuesto y amable. Realizó el trabajo tal cual lo conversamos y a buen precio. Lo recomiendo.</p>
+                        </div>
+
+                        <!-- Formulario para dejar nueva opinión -->
+                        <div class="mt-4 pt-4 border-top">
+                            <h4 class="fs-5 fw-bold mb-3">Dejá tu opinión</h4>
+                            <p class="text-muted small mb-4">Tu dirección de correo electrónico no será publicada.</p>
+                            
+                            <form id="reviewForm">
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control bg-light" placeholder="Tu nombre *" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control bg-light" placeholder="Tu email *" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control bg-light" rows="4" placeholder="Escribí tu experiencia con este profesional *" required></textarea>
+                                </div>
+                                
+                                <div class="mb-4 d-flex align-items-center gap-3">
+                                    <label class="fw-bold mb-0">Tu puntuación:</label>
+                                    <div class="star-rating text-muted fs-3" style="cursor: pointer; color: #ddd;">
+                                        <i class="far fa-star" data-rating="1"></i>
+                                        <i class="far fa-star" data-rating="2"></i>
+                                        <i class="far fa-star" data-rating="3"></i>
+                                        <i class="far fa-star" data-rating="4"></i>
+                                        <i class="far fa-star" data-rating="5"></i>
+                                    </div>
+                                    <!-- Input oculto para guardar la calificación y mandarla al backend -->
+                                    <input type="hidden" id="ratingValue" value="0" required>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-warning fw-bold px-4 py-3 w-100 rounded-3 shadow-sm">
+                                    Publicar opinión
+                                </button>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
 
@@ -247,14 +312,59 @@
         // Lógica para cambiar de pestañas (Tabs)
         document.querySelectorAll('.ptab').forEach(button => {
             button.addEventListener('click', () => {
-                // Quitar clase active de todos los botones y paneles
                 document.querySelectorAll('.ptab').forEach(btn => btn.classList.remove('active'));
                 document.querySelectorAll('.ptab-panel').forEach(panel => panel.classList.remove('active'));
                 
-                // Activar el seleccionado
                 button.classList.add('active');
                 document.getElementById(button.getAttribute('data-tab')).classList.add('active');
             });
+        });
+
+        // Lógica interactiva para las estrellas del formulario
+        const stars = document.querySelectorAll('.star-rating i');
+        const ratingInput = document.getElementById('ratingValue');
+        let currentRating = 0;
+
+        stars.forEach(star => {
+            // Al hacer click, fija la calificación
+            star.addEventListener('click', (e) => {
+                currentRating = e.target.getAttribute('data-rating');
+                ratingInput.value = currentRating;
+                updateStars(currentRating);
+            });
+            // Al pasar el mouse, pre-visualiza
+            star.addEventListener('mouseover', (e) => {
+                updateStars(e.target.getAttribute('data-rating'));
+            });
+            // Al quitar el mouse, vuelve a la calificación fija
+            star.addEventListener('mouseout', () => {
+                updateStars(currentRating);
+            });
+        });
+
+        function updateStars(rating) {
+            stars.forEach(star => {
+                if (star.getAttribute('data-rating') <= rating) {
+                    star.classList.remove('far');
+                    star.classList.add('fas', 'text-warning');
+                } else {
+                    star.classList.remove('fas', 'text-warning');
+                    star.classList.add('far');
+                }
+            });
+        }
+
+        // Simular el envío del formulario
+        document.getElementById('reviewForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (ratingInput.value == 0) {
+                alert("Por favor, selecciona una puntuación en estrellas.");
+                return;
+            }
+            alert('¡Gracias por tu reseña! En un entorno real, esto se guardaría en la base de datos.');
+            e.target.reset(); // Limpia el formulario
+            currentRating = 0;
+            updateStars(0); // Resetea las estrellas
         });
     </script>
 </body>
