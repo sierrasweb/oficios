@@ -30,7 +30,7 @@
             --border-color: #E2E8F0;
             --pattern-color: #cbd5e1;
             --wa-green: #25D366;
-            --star-color: #F59E0B; /* Color para las estrellas */
+            --star-color: #F59E0B;
             --font-main: 'Inter', sans-serif;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
@@ -92,7 +92,7 @@
 
         /* --- FONDO Y ESTRUCTURA DEL PERFIL --- */
         .profile-section {
-            padding: 120px 0 80px; 
+            padding: 120px 0 60px; 
             background-image: radial-gradient(var(--pattern-color) 1.5px, transparent 1.5px);
             background-size: 35px 35px; min-height: 100vh;
         }
@@ -178,6 +178,17 @@
         
         .btn-submit { background-color: var(--primary-color); color: #fff; transition: all 0.3s; border: none;}
         .btn-submit:hover { background-color: var(--primary-dark); color: #fff; transform: translateY(-2px); box-shadow: var(--shadow-md);}
+
+        /* --- FOOTER --- */
+        footer { 
+            padding: 60px 0 40px; text-align: center; color: var(--text-gray); 
+            background-color: var(--white); border-top: 1px solid var(--border-color); 
+            transition: all var(--transition-speed); 
+        }
+        .footer-logo { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); text-decoration: none; display: inline-block; margin-bottom: 12px; letter-spacing: -0.5px; transition: transform 0.3s;}
+        .footer-logo:hover { transform: scale(1.05); }
+        .footer-logo span { color: var(--primary-color); }
+        .footer-copyright { font-size: 0.85rem; margin-top: 20px; opacity: 0.8; }
 
         /* Mobile Sticky WhatsApp */
         .wpp-sticky-bar { display: none; }
@@ -324,7 +335,7 @@
                         <!-- Formulario Nueva Opinión -->
                         <div class="mt-4 pt-4 border-top" style="border-color: var(--border-color) !important;">
                             <h4 class="fs-5 fw-bold mb-3" style="color: var(--text-dark);">Dejá tu opinión</h4>
-                            <p style="color: var(--text-gray);" class="small mb-4">Tu dirección de correo electrónico y telefono no seran publicados.</p>
+                            <p style="color: var(--text-gray);" class="small mb-4">Tu dirección de correo electrónico no será publicada.</p>
                             
                             <form id="reviewForm">
                                 <div class="row g-3 mb-3">
@@ -366,6 +377,15 @@
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">Sierras<span>Web</span></a>
+            <p style="margin-bottom: 5px;">Desarrollo y Diseño Web Profesional.</p>
+            <p class="footer-copyright">&copy; 2026 Sierras Web. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <!-- Botón Flotante Mobile -->
     <div class="wpp-sticky-bar">
@@ -413,7 +433,7 @@
             if (navigator.share) {
                 navigator.share({
                     title: 'Perfil de Diego Maiorkevich',
-                    text: 'Te recomiendo este profesional en TodoOficio',
+                    text: 'Te recomiendo este profesional',
                     url: url
                 }).catch(console.error);
             } else {
