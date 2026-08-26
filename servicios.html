@@ -177,16 +177,14 @@
                     <i class="bi bi-patch-check-fill"></i> Profesional verificado
                 </div>
 
+                <!-- Estrellas y promedio dinámicos -->
                 <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
-    <!-- Aquí irán las estrellas dinámicas -->
-    <div id="header-stars" class="text-warning fs-5 d-flex gap-1">
-        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-    </div>
-    <!-- Promedio numérico (ej. 4.8) -->
-    <span id="header-rating-avg" class="fw-bold fs-5 text-dark" style="display: none;">0.0</span>
-    <!-- Cantidad de reseñas (ej. 12 reseñas) -->
-    <span id="header-rating-count" class="text-muted" style="font-size: 14px;">(0 reseñas)</span>
-</div>
+                    <div id="header-stars" class="text-warning fs-5 d-flex gap-1">
+                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <span id="header-rating-avg" class="fw-bold fs-5 text-dark" style="display: none;">0.0</span>
+                    <span id="header-rating-count" class="text-muted" style="font-size: 14px;">(0 reseñas)</span>
+                </div>
 
                 <!-- Botones -->
                 <a href="https://wa.me/5492615576762" target="_blank" class="whatsapp-btn">
@@ -246,18 +244,12 @@
                     <div class="info-card">
                         <h3 class="mb-4"><i class="bi bi-chat-dots text-warning"></i> Reseñas de clientes</h3>
                         
-<!-- Aquí se cargarán las reseñas automáticamente -->
-<div id="reviewsContainer">
-    <div class="text-center py-4">
-        <div class="spinner-border text-warning" role="status"></div>
-        <p class="text-muted mt-2">Cargando reseñas...</p>
-    </div>
-</div>
+                        <!-- Aquí se cargarán las reseñas automáticamente -->
+                        <div id="reviewsContainer">
+                            <div class="text-center py-4">
+                                <div class="spinner-border text-warning" role="status"></div>
+                                <p class="text-muted mt-2">Cargando reseñas...</p>
                             </div>
-                            <div class="text-warning mb-2" style="font-size: 14px;">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="mb-0 text-secondary">Muy predispuesto y amable. Realizó el trabajo tal cual lo conversamos y a buen precio. Lo recomiendo.</p>
                         </div>
 
                         <!-- Formulario para dejar nueva opinión (Actualizado con Teléfono) -->
@@ -360,8 +352,6 @@
         }
 
         // --- CONEXIÓN CON GOOGLE SHEETS ---
-        
-        // REEMPLAZA ESTA URL CON LA QUE TE DIO GOOGLE APPS SCRIPT
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwX87Outr4bvd-ubNVsD2GwUbhcjMgvYGJxy477jcOrAcTsQgPHasZKLEpZ8e8FvI90/exec';
 
         document.getElementById('reviewForm').addEventListener('submit', (e) => {
@@ -372,13 +362,11 @@
                 return;
             }
 
-            // Cambia el texto del botón mientras carga
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerText;
             submitBtn.innerText = 'Enviando...';
             submitBtn.disabled = true;
 
-            // Recolectar los datos de los inputs usando sus IDs
             const formData = new URLSearchParams();
             formData.append('nombre', document.getElementById('formNombre').value);
             formData.append('email', document.getElementById('formEmail').value);
@@ -386,7 +374,6 @@
             formData.append('resena', document.getElementById('formResena').value);
             formData.append('puntuacion', document.getElementById('ratingValue').value);
 
-            // Enviar a Google Sheets
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 body: formData
@@ -395,9 +382,11 @@
             .then(data => {
                 if(data.resultado === 'exito') {
                     alert('¡Gracias por tu reseña! Ha sido guardada exitosamente.');
-                    e.target.reset(); // Limpia el formulario
+                    e.target.reset();
                     currentRating = 0;
-                    updateStars(0); // Resetea las estrellas
+                    updateStars(0);
+                    // Recargar las reseñas para que aparezca la nueva inmediatamente
+                    loadReviews();
                 } else {
                     alert('Hubo un problema guardando tu reseña.');
                 }
@@ -407,81 +396,95 @@
                 console.error('Error:', error);
             })
             .finally(() => {
-                // Restaurar el botón a su estado original
                 submitBtn.innerText = originalText;
                 submitBtn.disabled = false;
             });
         });
-        // Función para cargar y mostrar las reseñas desde Google Sheets
-function loadReviews() {
-    const container = document.getElementById('reviewsContainer');
 
-    fetch(GOOGLE_SCRIPT_URL)
-    .then(response => response.json())
-    .then(data => {
-        if(data.resultado === 'exito') {
-            const reviews = data.datos;
-            
-            if(reviews.length === 0) {
-                container.innerHTML = '<p class="text-muted text-center py-4">Aún no hay reseñas. ¡Sé el primero en opinar!</p>';
-                return;
-            }
+        // Función para cargar y mostrar las reseñas (CON CÁLCULO DE PROMEDIOS)
+        function loadReviews() {
+            const container = document.getElementById('reviewsContainer');
+            const headerStars = document.getElementById('header-stars');
+            const headerAvg = document.getElementById('header-rating-avg');
+            const headerCount = document.getElementById('header-rating-count');
 
-            let html = '';
-            reviews.forEach(review => {
-                // Formatear la fecha y hora a formato local
-                let fechaObj = new Date(review.fecha);
-                let fechaStr = isNaN(fechaObj) ? review.fecha : fechaObj.toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' });
-
-                // Crear iniciales para el avatar (ej. Juan = JU)
-                let iniciales = review.nombre.substring(0, 2).toUpperCase();
-
-                // Generar las estrellas de 1 a 5
-                let estrellasHtml = '';
-                let rating = parseInt(review.puntuacion) || 0;
-                for(let i = 1; i <= 5; i++) {
-                    if(i <= rating) {
-                        estrellasHtml += '<i class="fas fa-star"></i>';
-                    } else {
-                        estrellasHtml += '<i class="far fa-star"></i>';
+            fetch(GOOGLE_SCRIPT_URL)
+            .then(response => response.json())
+            .then(data => {
+                if(data.resultado === 'exito') {
+                    const reviews = data.datos;
+                    
+                    if(reviews.length === 0) {
+                        container.innerHTML = '<p class="text-muted text-center py-4">Aún no hay reseñas. ¡Sé el primero en opinar!</p>';
+                        headerCount.innerText = '(0 reseñas)';
+                        return;
                     }
-                }
 
-                // Armar la tarjeta de la reseña
-                html += `
-                <div class="review-card mb-4 p-3 border rounded shadow-sm">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="text-white rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 45px; height: 45px; font-weight: bold; background-color: #198754;">${iniciales}</div>
-                        <div>
-                            <h5 class="mb-0 fs-6 fw-bold">${review.nombre}</h5>
-                            <small class="text-muted">${fechaStr}</small>
+                    let totalScore = 0;
+                    let html = '';
+
+                    reviews.forEach(review => {
+                        let rating = parseInt(review.puntuacion) || 0;
+                        totalScore += rating;
+
+                        let fechaObj = new Date(review.fecha);
+                        let fechaStr = isNaN(fechaObj) ? review.fecha : fechaObj.toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' });
+                        let iniciales = review.nombre.substring(0, 2).toUpperCase();
+
+                        let estrellasHtml = '';
+                        for(let i = 1; i <= 5; i++) {
+                            estrellasHtml += (i <= rating) ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+                        }
+
+                        html += `
+                        <div class="review-card mb-4 p-3 border rounded shadow-sm">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="text-white rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 45px; height: 45px; font-weight: bold; background-color: #198754;">${iniciales}</div>
+                                <div>
+                                    <h5 class="mb-0 fs-6 fw-bold">${review.nombre}</h5>
+                                    <small class="text-muted">${fechaStr}</small>
+                                </div>
+                            </div>
+                            <div class="text-warning mb-2" style="font-size: 14px;">
+                                ${estrellasHtml}
+                            </div>
+                            <p class="mb-0 text-secondary">${review.resena}</p>
                         </div>
-                    </div>
-                    <div class="text-warning mb-2" style="font-size: 14px;">
-                        ${estrellasHtml}
-                    </div>
-                    <p class="mb-0 text-secondary">${review.resena}</p>
-                </div>
-                `;
+                        `;
+                    });
+                    container.innerHTML = html;
+
+                    // Promedio y header update
+                    let average = totalScore / reviews.length;
+                    headerAvg.innerText = average.toFixed(1);
+                    headerAvg.style.display = 'inline-block';
+                    headerCount.innerText = `(${reviews.length} ${reviews.length === 1 ? 'reseña' : 'reseñas'})`;
+
+                    let headerStarsHtml = '';
+                    let fullStars = Math.floor(average);
+                    let hasHalfStar = (average - fullStars) >= 0.5;
+
+                    for (let i = 1; i <= 5; i++) {
+                        if (i <= fullStars) {
+                            headerStarsHtml += '<i class="fas fa-star"></i>';
+                        } else if (i === fullStars + 1 && hasHalfStar) {
+                            headerStarsHtml += '<i class="fas fa-star-half-alt"></i>';
+                        } else {
+                            headerStarsHtml += '<i class="far fa-star"></i>';
+                        }
+                    }
+                    headerStars.innerHTML = headerStarsHtml;
+
+                } else {
+                    container.innerHTML = '<p class="text-danger">Error al cargar las reseñas.</p>';
+                }
+            })
+            .catch(error => {
+                container.innerHTML = '<p class="text-danger">No se pudieron cargar las reseñas. Verifica tu conexión.</p>';
             });
-            container.innerHTML = html;
-        } else {
-            container.innerHTML = '<p class="text-danger">Error al cargar las reseñas.</p>';
         }
-    })
-    .catch(error => {
-        container.innerHTML = '<p class="text-danger">No se pudieron cargar las reseñas. Verifica tu conexión.</p>';
-    });
-}
 
-// Cargar las reseñas apenas se abre la página
-document.addEventListener('DOMContentLoaded', loadReviews);
-
-// También actualizamos la lista si el usuario envía una nueva reseña
-// Busca en tu código anterior el fetch(GOOGLE_SCRIPT_URL, { method: 'POST'...
-// y dentro de la respuesta exitosa (donde dice alert('¡Gracias por tu reseña...'))
-// agrega esta línea para que se recargue la lista de inmediato:
-// loadReviews();
+        document.addEventListener('DOMContentLoaded', loadReviews);
     </script>
 </body>
 </html>
