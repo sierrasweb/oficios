@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TodoOficio - Encontrá profesionales de confianza para arreglos del hogar y servicios. Solicitá presupuestos gratis y directos sin comisiones.">
-    <title>TodoOficio | Encontrá Profesionales de Confianza</title>
+    <meta name="description" content="Oficios Sierras Web - Encontrá profesionales de confianza para arreglos del hogar y servicios. Solicitá presupuestos gratis y directos sin comisiones.">
+    <title>Oficios Sierras Web | Encontrá Profesionales de Confianza</title>
     
     <!-- Fuentes y AOS Library -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
@@ -134,81 +134,19 @@
             -webkit-text-fill-color: transparent;
         }
         .hero p { font-size: 1.2rem; color: var(--text-gray); max-width: 720px; margin: 0 auto 30px; }
+
+        /* Nuevas Insignias Hero */
+        .hero-trust-badges {
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px;
+        }
+        .hero-trust-badge {
+            background: var(--white); padding: 8px 18px; border-radius: 20px; 
+            font-size: 0.95rem; font-weight: 600; color: var(--text-dark); 
+            box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+        .hero-trust-badge:hover { transform: translateY(-2px); border-color: var(--primary-color); }
         
-        /* Buscador del Hero */
-        .hero-search-box {
-            max-width: 680px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            background: var(--white);
-            padding: 8px 10px 8px 20px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-        }
-        .hero-search-box:focus-within {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px var(--primary-light);
-        }
-        .hero-search-input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 1.05rem;
-            font-family: var(--font-main);
-            color: var(--text-dark);
-            background: transparent;
-        }
-        .hero-search-input::placeholder {
-            color: var(--text-gray);
-            opacity: 0.8;
-        }
-        .hero-search-btn {
-            background-color: var(--primary-color);
-            color: #fff;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-        .hero-search-btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .search-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .tag-pill {
-            background: var(--white);
-            color: var(--text-gray);
-            border: 1px solid var(--border-color);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .tag-pill:hover, .tag-pill.active {
-            background: var(--primary-light);
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             padding: 16px 36px; border-radius: 12px; font-size: 1.1rem; font-weight: 600;
@@ -383,8 +321,6 @@
         @media (max-width: 768px) {
             .hero { padding: 140px 0 70px; }
             .hero h1 { font-size: 2.6rem; }
-            .hero-search-box { flex-direction: column; padding: 12px; gap: 10px; }
-            .hero-search-btn { width: 100%; justify-content: center; }
             .nav-links { display: none; }
             .about-grid { grid-template-columns: 1fr; }
             .about-img { height: 300px; }
@@ -400,14 +336,14 @@
     <!-- Navegación -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">Todo<span>Oficio</span></a>
+            <a href="#" class="logo">Oficios <span>Sierras Web</span></a>
             <ul class="nav-links">
-                <li><a href="#categorias">Categorías</a></li>
+                <li><a href="https://oficios.sierrasweb.com.ar/categorias">Categorías</a></li>
                 <li><a href="#como-funciona">Cómo Funciona</a></li>
                 <li><a href="#prestadores">Prestadores</a></li>
                 <li><a href="#planes">Planes Prestadores</a></li>
                 <li><a href="#faq">Preguntas Frecuentes</a></li>
-                <li><a href="#planes" class="btn-nav">Ofrecer mi Servicio</a></li>
+                <li><a href="https://wa.me/5492664212722?text=Hola!%20Me%20interesa%20ofrecer%20mis%20servicios%20en%20Oficios%20Sierras%20Web" class="btn-nav" target="_blank">Ofrecer mi Servicio</a></li>
                 
                 <li>
                     <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar Tema">
@@ -444,24 +380,17 @@
             <h1 data-aos="fade-up" data-aos-delay="200">Encontrá al <span>profesional ideal</span> para lo que necesites</h1>
             <p data-aos="fade-up" data-aos-delay="300">Conectamos a miles de usuarios con especialistas verificados de confianza. Pedí presupuestos gratis y directo sin comisiones.</p>
             
-            <!-- Buscador Interactivo -->
-            <div class="hero-search-box" data-aos="zoom-in" data-aos-delay="400">
-                <input type="text" id="hero-search" class="hero-search-input" placeholder="Ej: Plomero, Electricista, Gasista, Pintor, Fletes..." autocomplete="off">
-                <button type="button" id="btn-search" class="hero-search-btn">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    Buscar
-                </button>
-            </div>
-
-            <!-- Tags Rápidos -->
-            <div class="search-tags" data-aos="fade-up" data-aos-delay="500">
-                <button class="tag-pill active" data-filter="all">Todos</button>
-                <button class="tag-pill" data-filter="Plomería">🔧 Plomería</button>
-                <button class="tag-pill" data-filter="Electricidad">⚡ Electricidad</button>
-                <button class="tag-pill" data-filter="Gas">🔥 Gasista</button>
-                <button class="tag-pill" data-filter="Pintura">🎨 Pintura</button>
-                <button class="tag-pill" data-filter="Refrigeración">❄️ Aire Acondicionado</button>
-                <button class="tag-pill" data-filter="Fletes">🚚 Fletes & Mudanzas</button>
+            <!-- Frases y Llamado a la Acción -->
+            <div class="hero-promotional" data-aos="fade-up" data-aos-delay="400">
+                <div class="hero-trust-badges">
+                    <span class="hero-trust-badge">✅ Profesionales Verificados</span>
+                    <span class="hero-trust-badge">🤝 Trato Directo</span>
+                    <span class="hero-trust-badge">💰 Sin Comisiones</span>
+                </div>
+                <a href="https://oficios.sierrasweb.com.ar/categorias" class="btn btn-primary">
+                    Explorar Categorías
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
             </div>
         </div>
     </header>
@@ -555,7 +484,7 @@
         <section id="como-funciona" class="section bg-gray">
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
-                    <h2>¿Cómo Funciona TodoOficio?</h2>
+                    <h2>¿Cómo Funciona Oficios Sierras Web?</h2>
                     <p>En solo 3 pasos conseguí presupuesto de profesionales calificados cerca de tu zona.</p>
                 </div>
                 
@@ -587,7 +516,7 @@
                 <div class="about-grid">
                     <div class="about-text" data-aos="fade-right">
                         <h3>Transparencia y Seguridad para tu Hogar</h3>
-                        <p>Sabemos lo valioso que es abrirle las puertas de tu casa a un trabajador. Por eso, en <strong>TodoOficio</strong> priorizamos la confianza a través de un estricto sistema de reputación inalterable.</p>
+                        <p>Sabemos lo valioso que es abrirle las puertas de tu casa a un trabajador. Por eso, en <strong>Oficios Sierras Web</strong> priorizamos la confianza a través de un estricto sistema de reputación inalterable.</p>
                         <p>Cada calificación otorgada por un cliente queda plasmada en el perfil del prestador, garantizando que los mejores profesionales destaquen por la calidad y responsabilidad de sus servicios.</p>
                     </div>
                     <div class="about-img" data-aos="fade-left"></div>
@@ -619,7 +548,7 @@
                                 </div>
                                 <p>Gasista Matriculado y Plomero. Especialista en instalaciones de calefones, termotanques y arreglos de filtraciones complejas.</p>
                             </div>
-                            <a href="https://wa.me/5492664212722?text=Hola%20Carlos!%20Te%20encontr%C3%A9%20en%20TodoOficio%20y%20necesito%20un%20presupuesto%20para%20un%20trabajo%20de%20plomer%C3%ADa/gas." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
+                            <a href="https://wa.me/5492664212722?text=Hola%20Carlos!%20Te%20encontr%C3%A9%20en%20Oficios%20Sierras%20Web%20y%20necesito%20un%20presupuesto%20para%20un%20trabajo%20de%20plomer%C3%ADa/gas." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
                         </div>
                     </div>
 
@@ -638,7 +567,7 @@
                                 </div>
                                 <p>Electricista matriculado. Urgencias 24hs por cortocircuitos, recambio de tableros viejos e instalación de luminarias.</p>
                             </div>
-                            <a href="https://wa.me/5492664212722?text=Hola%20Mart%C3%ADn!%20Te%20encontr%C3%A9%20en%20TodoOficio%20y%20necesito%20consultarte%20por%20un%20trabajo%20el%C3%A9ctrico." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
+                            <a href="https://wa.me/5492664212722?text=Hola%20Mart%C3%ADn!%20Te%20encontr%C3%A9%20en%20Oficios%20Sierras%20Web%20y%20necesito%20consultarte%20por%20un%20trabajo%20el%C3%A9ctrico." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
                         </div>
                     </div>
 
@@ -657,7 +586,7 @@
                                 </div>
                                 <p>Servicio técnico oficial en aires acondicionados Split. Mantenimiento, desinstalaciones y recarga de gas garantizada.</p>
                             </div>
-                            <a href="https://wa.me/5492664212722?text=Hola!%20Los%20vi%20en%20TodoOficio%20y%20necesito%20presupuesto%20para%20service%20de%20aire%20acondicionado." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
+                            <a href="https://wa.me/5492664212722?text=Hola!%20Los%20vi%20en%20Oficios%20Sierras%20Web%20y%20necesito%20presupuesto%20para%20service%20de%20aire%20acondicionado." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
@@ -668,7 +597,7 @@
         <section id="planes" class="section">
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
-                    <h2>¿Ofrecés un oficio? Sumate a TodoOficio</h2>
+                    <h2>¿Ofrecés un oficio? Sumate a Oficios Sierras Web</h2>
                     <p>Digitalizá tu trabajo, conseguí clientes todos los días y mostrá tu reputación profesional en internet.</p>
                 </div>
 
@@ -687,7 +616,7 @@
                             <li>Solicitud de múltiples presupuestos</li>
                             <li>Sin comisiones extras por servicio</li>
                         </ul>
-                        <a href="#categorias" class="btn-outline">Buscar Profesionales</a>
+                        <a href="https://oficios.sierrasweb.com.ar/categorias" class="btn-outline">Buscar Profesionales</a>
                     </div>
 
                     <!-- Plan Prestador Pro -->
@@ -705,7 +634,7 @@
                             <li>Contacto directo a tu WhatsApp personal</li>
                             <li>Herramienta rápida para presupuestos</li>
                         </ul>
-                        <a href="https://wa.me/5492664212722?text=Hola!%20Quiero%20registrarme%20como%20Prestador%20Pro%20en%20TodoOficio" class="btn-outline" target="_blank">Sumarme como Prestador</a>
+                        <a href="https://wa.me/5492664212722?text=Hola!%20Quiero%20registrarme%20como%20Prestador%20Pro%20en%20Oficios%20Sierras%20Web" class="btn-outline" target="_blank">Sumarme como Prestador</a>
                     </div>
                 </div>
 
@@ -753,14 +682,14 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <a href="#" class="footer-logo">Todo<span>Oficio</span></a>
+            <a href="#" class="footer-logo">Oficios <span>Sierras Web</span></a>
             <p>La red de trabajadores independientes y soluciones para el hogar.</p>
-            <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.7;">© 2026 TodoOficio. Todos los derechos reservados.</p>
+            <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.7;">© 2026 Oficios Sierras Web. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <!-- Botón Flotante WhatsApp -->
-    <a href="https://wa.me/5492664212722?text=Hola!%20Tengo%20una%20consulta%20sobre%20la%20plataforma%20TodoOficio." class="wa-float" target="_blank" aria-label="Escribinos por WhatsApp">
+    <a href="https://wa.me/5492664212722?text=Hola!%20Tengo%20una%20consulta%20sobre%20la%20plataforma%20Oficios%20Sierras%20Web." class="wa-float" target="_blank" aria-label="Escribinos por WhatsApp">
         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" viewBox="0 0 16 16">
             <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
         </svg>
@@ -813,69 +742,6 @@
 
         themeToggleBtn.addEventListener('click', toggleTheme);
         themeToggleMobileBtn.addEventListener('click', toggleTheme);
-
-        // --- LÓGICA DEL BUSCADOR Y FILTROS INTERACTIVOS ---
-        const searchInput = document.getElementById('hero-search');
-        const searchBtn = document.getElementById('btn-search');
-        const categoryCards = document.querySelectorAll('#categories-grid .feature-card');
-        const providerCards = document.querySelectorAll('#providers-grid .portfolio-card');
-        const tagPills = document.querySelectorAll('.tag-pill');
-
-        function filterContent(query) {
-            const cleanQuery = query.toLowerCase().trim();
-
-            // Filtrar Categorías
-            categoryCards.forEach(card => {
-                const text = card.textContent.toLowerCase();
-                const category = card.getAttribute('data-category').toLowerCase();
-                if (cleanQuery === '' || text.includes(cleanQuery) || category.includes(cleanQuery)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Filtrar Prestadores
-            providerCards.forEach(card => {
-                const text = card.textContent.toLowerCase();
-                const category = card.getAttribute('data-category').toLowerCase();
-                if (cleanQuery === '' || text.includes(cleanQuery) || category.includes(cleanQuery)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Evento Input
-        searchInput.addEventListener('input', (e) => {
-            filterContent(e.target.value);
-            // reset active pill
-            tagPills.forEach(p => p.classList.remove('active'));
-            if(e.target.value === '') tagPills[0].classList.add('active');
-        });
-
-        // Evento Click Botón Buscar
-        searchBtn.addEventListener('click', () => {
-            filterContent(searchInput.value);
-        });
-
-        // Eventos Tags Rápidos
-        tagPills.forEach(pill => {
-            pill.addEventListener('click', () => {
-                tagPills.forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
-
-                const filterVal = pill.getAttribute('data-filter');
-                if (filterVal === 'all') {
-                    searchInput.value = '';
-                    filterContent('');
-                } else {
-                    searchInput.value = filterVal;
-                    filterContent(filterVal);
-                }
-            });
-        });
     </script>
 </body>
 </html>
