@@ -22,7 +22,7 @@
             --nav-bg: rgba(255, 255, 255, 0.85);
             --border-color: #E2E8F0;
             --pattern-color: #cbd5e1;
-            --star-color: #F59E0B; /* Único amarillo para las estrellas y el sol */
+            --star-color: #F59E0B;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -127,7 +127,7 @@
     <!-- Navegación -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Oficios <span>Sierras Web</span></a>
+            <a href="https://oficios.sierrasweb.com.ar" class="logo">Oficios <span>Sierras Web</span></a>
             <button id="theme-toggle-mobile" class="theme-toggle theme-toggle-mobile" style="display: none;" aria-label="Cambiar Tema">
                 <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <!-- Sol corregido con rayos -->
@@ -144,9 +144,9 @@
                 </svg>
             </button>
             <ul class="nav-links">
-                <li><a href="#">Inicio</a></li>
+                <li><a href="https://oficios.sierrasweb.com.ar">Inicio</a></li>
                 <li><a href="#" style="color: var(--primary-color); font-weight: 600;">Categorías</a></li>
-                <li><a href="#" class="btn-nav">Registrarse</a></li>
+                <li><a href="https://wa.me/5492664212722?text=Hola!%20Me%20interesa%20ofrecer%20mis%20servicios%20en%20Oficios%20Sierras%20Web" target="_blank" class="btn-nav">Registrarse</a></li>
                 <li>
                     <button id="theme-toggle" class="theme-toggle">
                         <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -203,7 +203,7 @@
     <!-- Footer -->
     <footer style="padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color); background: var(--white);">
         <div class="container">
-            <a href="#" class="logo" style="font-size: 1.5rem;">Oficios <span>Sierras Web</span></a>
+            <a href="https://oficios.sierrasweb.com.ar" class="logo" style="font-size: 1.5rem;">Oficios <span>Sierras Web</span></a>
             <p style="margin: 10px 0 5px; color: var(--text-gray);">Desarrollo y Diseño Web Profesional.</p>
             <p style="font-size: 0.85rem; color: var(--text-gray); opacity: 0.8;">&copy; 2026 Sierras Web. Todos los derechos reservados.</p>
         </div>
@@ -239,6 +239,10 @@
             .then(data => {
                 if(data.resultado === 'exito') {
                     allProfessionals = data.datos;
+                    
+                    // --- ALEATORIZADOR (SHUFFLE) DE TARJETAS ---
+                    allProfessionals.sort(() => Math.random() - 0.5);
+
                     extractCategories(allProfessionals);
                     renderCards(allProfessionals);
                 } else {
