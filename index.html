@@ -102,7 +102,7 @@
         [data-theme="dark"] .moon-icon { opacity: 0; transform: translateY(-30px) rotate(-45deg); }
         [data-theme="dark"] .sun-icon { opacity: 1; transform: translateY(0) rotate(0deg); }
 
-        /* --- Menú Responsive (Tablets y Celulares) --- */
+        /* --- Menú Responsive --- */
         @media (max-width: 992px) {
             .nav-links { gap: 1rem; }
             .logo { font-size: 1.4rem; }
@@ -214,10 +214,10 @@
         .feature-card:hover .feature-icon { transform: scale(1.1) rotate(5deg); }
         .feature-card h3 { font-size: 1.35rem; margin-bottom: 12px; color: var(--text-dark); }
         .feature-card p { color: var(--text-gray); font-size: 0.98rem; margin-bottom: 20px; flex-grow: 1; }
-        .feature-card-footer { display: flex; justify-content: space-between; align-items: center; }
-        .feature-badge-count { font-size: 0.85rem; font-weight: 600; color: var(--primary-color); background: var(--primary-light); padding: 4px 12px; border-radius: 20px; }
-        .feature-link { text-decoration: none; font-weight: 700; color: var(--primary-color); font-size: 0.95rem; }
-        .feature-link:hover { text-decoration: underline; }
+        
+        .feature-card-footer { display: flex; justify-content: flex-end; align-items: center; }
+        .feature-link { text-decoration: none; font-weight: 700; color: var(--primary-color); font-size: 0.95rem; transition: gap 0.3s;}
+        .feature-link:hover { text-decoration: underline; gap: 5px; }
 
         /* --- Cómo Funciona Pasos --- */
         .step-card {
@@ -236,72 +236,19 @@
         .step-card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--text-dark); }
         .step-card p { color: var(--text-gray); font-size: 1rem; }
 
-        /* --- Prestadores Destacados --- */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        .portfolio-card { 
-            background: var(--white); border-radius: 20px; overflow: hidden; 
-            box-shadow: var(--shadow-md); transition: all 0.4s ease; border: 1px solid var(--border-color); 
-            display: flex; flex-direction: column;
-        }
-        .portfolio-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: var(--primary-color); }
-        .portfolio-img { height: 230px; background-color: var(--bg-light); background-size: cover; background-position: center; border-bottom: 1px solid var(--border-color); position: relative; }
-        
-        .portfolio-badge { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.92); backdrop-filter: blur(4px); color: var(--text-dark); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; box-shadow: var(--shadow-sm); }
-        .verified-badge { position: absolute; top: 15px; left: 15px; background: #25D366; color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; box-shadow: var(--shadow-sm); }
-        
-        .portfolio-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .portfolio-content h3 { font-size: 1.4rem; margin-bottom: 6px; color: var(--text-dark); }
-        .provider-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 0.95rem; }
-        .provider-rating { color: #F59E0B; font-weight: 700; }
-        .provider-location { color: var(--text-gray); }
-        .portfolio-content p { color: var(--text-gray); margin-bottom: 25px; font-size: 0.98rem; }
-        .portfolio-link { color: var(--primary-color); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: gap 0.3s; }
-        .portfolio-link:hover { gap: 12px; }
-
-        /* --- Planes para Prestadores --- */
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: stretch; margin-bottom: 50px; }
-        .price-card { 
-            background: var(--white); border-radius: 24px; border: 1px solid var(--border-color); 
-            padding: 50px 40px; text-align: center; box-shadow: var(--shadow-md); 
-            transition: all 0.4s ease; display: flex; flex-direction: column; justify-content: space-between;
-            position: relative;
-        }
-        .price-card:hover { border-color: var(--primary-color); box-shadow: var(--shadow-lg); transform: translateY(-10px); }
-        
-        .price-card.featured { border: 2px solid var(--primary-color); background-color: var(--bg-light); transform: scale(1.02); }
-        .price-card.featured:hover { transform: scale(1.02) translateY(-10px); }
-        .price-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: #fff; padding: 6px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; letter-spacing: 1px; }
-
-        .price-header h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 15px; color: var(--text-dark); }
-        .price-header p { font-size: 1rem; color: var(--text-gray); margin-bottom: 25px; min-height: 45px; }
-        .price-amount { font-size: 3.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 35px; line-height: 1; }
-        .price-amount span { font-size: 1.2rem; color: var(--text-gray); font-weight: 500; }
-        
-        .price-features { list-style: none; text-align: left; margin-bottom: 40px; flex-grow: 1; }
-        .price-features li { margin-bottom: 18px; display: flex; align-items: flex-start; gap: 12px; color: var(--text-gray); font-size: 1.05rem; }
-        .price-features li::before { content: '✓'; color: var(--primary-color); font-weight: bold; background: var(--primary-light); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        
-        .btn-outline { 
-            display: block; width: 100%; padding: 16px; border: 2px solid var(--primary-color); 
-            color: var(--primary-color); font-weight: 600; font-size: 1.1rem; text-decoration: none; 
-            border-radius: 12px; transition: all 0.3s; text-align: center;
-        }
-        .btn-outline:hover { background-color: var(--primary-color); color: #fff; box-shadow: 0 10px 15px -5px rgba(2, 132, 199, 0.3); }
-        .price-card.featured .btn-outline { background-color: var(--primary-color); color: #fff; }
-        .price-card.featured .btn-outline:hover { background-color: var(--primary-dark); }
-
-        /* Dominio Extra Box */
+        /* --- Banner Contacto Profesionales --- */
         .domain-box { 
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); 
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%); 
             color: #fff; border-radius: 20px; padding: 40px; display: flex; align-items: center; 
             justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: var(--shadow-lg); 
             position: relative; overflow: hidden;
+            max-width: 900px; margin: 0 auto;
         }
-        .domain-box::before { content: '🛠️'; position: absolute; right: -10px; top: -30px; font-size: 9rem; opacity: 0.06; }
-        .domain-info h4 { font-size: 1.5rem; margin-bottom: 10px; color: #fff;}
-        .domain-info p { color: #94A3B8; font-size: 1.05rem; }
-        .btn-domain { background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: 600; transition: all 0.3s; backdrop-filter: blur(5px); }
-        .btn-domain:hover { background-color: #fff; color: #0F172A; transform: translateY(-2px); }
+        .domain-box::before { content: '🤝'; position: absolute; right: -10px; top: -30px; font-size: 9rem; opacity: 0.08; }
+        .domain-info h4 { font-size: 1.8rem; margin-bottom: 10px; color: #fff;}
+        .domain-info p { color: rgba(255,255,255,0.9); font-size: 1.1rem; }
+        .btn-domain { background-color: #fff; color: var(--primary-color); padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: inline-flex; align-items: center; gap: 8px;}
+        .btn-domain:hover { background-color: #f8f9fa; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
 
         /* --- Preguntas Frecuentes (FAQ) --- */
         .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
@@ -316,7 +263,8 @@
 
         /* --- Footer --- */
         footer { padding: 80px 0 40px; text-align: center; color: var(--text-gray); background-color: var(--white); border-top: 1px solid var(--border-color); transition: all var(--transition-speed); }
-        .footer-logo { font-size: 2.2rem; font-weight: 800; color: var(--text-dark); text-decoration: none; display: block; margin-bottom: 20px; }
+        .footer-logo { font-size: 2.2rem; font-weight: 800; color: var(--text-dark); text-decoration: none; display: block; margin-bottom: 20px; transition: transform 0.3s;}
+        .footer-logo:hover { transform: scale(1.05); }
         .footer-logo span { color: var(--primary-color); }
 
         /* Botón Flotante WA */
@@ -335,8 +283,6 @@
             .about-grid { grid-template-columns: 1fr; }
             .about-img { height: 300px; }
             .domain-box { flex-direction: column; text-align: center; padding: 30px 20px; }
-            .price-card.featured { transform: scale(1); }
-            .price-card.featured:hover { transform: translateY(-5px); }
         }
     </style>
 </head>
@@ -351,8 +297,7 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="https://oficios.sierrasweb.com.ar/categorias">Categorías</a></li>
                 <li><a href="#como-funciona">Cómo Funciona</a></li>
-                <li><a href="#prestadores">Prestadores</a></li>
-                <li><a href="#planes">Planes</a></li>
+                <li><a href="#contacto">Sumate</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="https://wa.me/5492664212722?text=Hola!%20Me%20interesa%20ofrecer%20mis%20servicios%20en%20Oficios%20Sierras%20Web" class="btn-nav" target="_blank">Ofrecer mi Servicio</a></li>
             </ul>
@@ -414,7 +359,7 @@
                     <p>Explorá nuestras más de 50 especialidades con profesionales listos para ayudarte.</p>
                 </div>
                 
-                <div class="features-grid">
+                <div class="features-grid" id="categories-grid">
                     <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
                         <div>
                             <div class="feature-icon">🔧</div>
@@ -422,8 +367,7 @@
                             <p>Reparación de filtraciones, destapes de cañerías, instalación de griferías, mochilas e inodoros.</p>
                         </div>
                         <div class="feature-card-footer">
-                            <span class="feature-badge-count">120+ Prestadores</span>
-                            <a href="#prestadores" class="feature-link">Ver perfil &rarr;</a>
+                            <a href="https://oficios.sierrasweb.com.ar/categorias" class="feature-link">Ir a categorías &rarr;</a>
                         </div>
                     </div>
 
@@ -434,8 +378,7 @@
                             <p>Solución a cortocircuitos, armado de tableros, cableados, instalación de luminarias LED y térmicas.</p>
                         </div>
                         <div class="feature-card-footer">
-                            <span class="feature-badge-count">95+ Prestadores</span>
-                            <a href="#prestadores" class="feature-link">Ver perfil &rarr;</a>
+                            <a href="https://oficios.sierrasweb.com.ar/categorias" class="feature-link">Ir a categorías &rarr;</a>
                         </div>
                     </div>
 
@@ -446,8 +389,7 @@
                             <p>Instalación de calefones, termotanques, cocinas, estufas y prueba de hermeticidad certificada.</p>
                         </div>
                         <div class="feature-card-footer">
-                            <span class="feature-badge-count">60+ Prestadores</span>
-                            <a href="#prestadores" class="feature-link">Ver perfil &rarr;</a>
+                            <a href="https://oficios.sierrasweb.com.ar/categorias" class="feature-link">Ir a categorías &rarr;</a>
                         </div>
                     </div>
 
@@ -458,8 +400,7 @@
                             <p>Pintura de interiores y exteriores, tratamiento de humedad, impermeabilización de techos y durlock.</p>
                         </div>
                         <div class="feature-card-footer">
-                            <span class="feature-badge-count">110+ Prestadores</span>
-                            <a href="#prestadores" class="feature-link">Ver perfil &rarr;</a>
+                            <a href="https://oficios.sierrasweb.com.ar/categorias" class="feature-link">Ir a categorías &rarr;</a>
                         </div>
                     </div>
 
@@ -470,8 +411,7 @@
                             <p>Instalación, mantenimiento preventivo, recarga de gas refrigerante R410/R22 y reparación de placas.</p>
                         </div>
                         <div class="feature-card-footer">
-                            <span class="feature-badge-count">80+ Prestadores</span>
-                            <a href="#prestadores" class="feature-link">Ver perfil &rarr;</a>
+                            <a href="https://oficios.sierrasweb.com.ar/categorias" class="feature-link">Ir a categorías &rarr;</a>
                         </div>
                     </div>
 
@@ -482,8 +422,7 @@
                             <p>Traslados locales y de larga distancia, peones para carga/descarga y transporte seguro de pertenencias.</p>
                         </div>
                         <div class="feature-card-footer">
-                            <span class="feature-badge-count">75+ Prestadores</span>
-                            <a href="#prestadores" class="feature-link">Ver perfil &rarr;</a>
+                            <a href="https://oficios.sierrasweb.com.ar/categorias" class="feature-link">Ir a categorías &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -534,133 +473,28 @@
             </div>
         </section>
 
-        <!-- Prestadores Destacados -->
-        <section id="prestadores" class="section bg-gray">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <h2>Prestadores Destacados</h2>
-                    <p>Profesionales recomendados por la comunidad con excelentes calificaciones.</p>
-                </div>
-                
-                <div class="portfolio-grid">
-                    <!-- Prestador 1 -->
-                    <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop');">
-                            <span class="verified-badge">✓ Verificado</span>
-                            <span class="portfolio-badge">Plomería & Gas</span>
-                        </div>
-                        <div class="portfolio-content">
-                            <div>
-                                <h3>Carlos Rodríguez</h3>
-                                <div class="provider-meta">
-                                    <span class="provider-rating">⭐ 4.9 (42 opiniones)</span>
-                                    <span class="provider-location">📍 Zona Centro</span>
-                                </div>
-                                <p>Gasista Matriculado y Plomero. Especialista en instalaciones de calefones, termotanques y arreglos de filtraciones complejas.</p>
-                            </div>
-                            <a href="https://wa.me/5492664212722?text=Hola%20Carlos!%20Te%20encontr%C3%A9%20en%20Oficios%20Sierras%20Web%20y%20necesito%20un%20presupuesto%20para%20un%20trabajo%20de%20plomer%C3%ADa/gas." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
-                        </div>
-                    </div>
-
-                    <!-- Prestador 2 -->
-                    <div class="portfolio-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=800&auto=format&fit=crop');">
-                            <span class="verified-badge">✓ Verificado</span>
-                            <span class="portfolio-badge">Electricidad</span>
-                        </div>
-                        <div class="portfolio-content">
-                            <div>
-                                <h3>Martín Gómez</h3>
-                                <div class="provider-meta">
-                                    <span class="provider-rating">⭐ 5.0 (58 opiniones)</span>
-                                    <span class="provider-location">📍 Zona Norte</span>
-                                </div>
-                                <p>Electricista matriculado. Urgencias 24hs por cortocircuitos, recambio de tableros viejos e instalación de luminarias.</p>
-                            </div>
-                            <a href="https://wa.me/5492664212722?text=Hola%20Mart%C3%ADn!%20Te%20encontr%C3%A9%20en%20Oficios%20Sierras%20Web%20y%20necesito%20consultarte%20por%20un%20trabajo%20el%C3%A9ctrico." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
-                        </div>
-                    </div>
-
-                    <!-- Prestador 3 -->
-                    <div class="portfolio-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop');">
-                            <span class="verified-badge">✓ Verificado</span>
-                            <span class="portfolio-badge">Refrigeración</span>
-                        </div>
-                        <div class="portfolio-content">
-                            <div>
-                                <h3>ClimaTech San Luis</h3>
-                                <div class="provider-meta">
-                                    <span class="provider-rating">⭐ 4.8 (31 opiniones)</span>
-                                    <span class="provider-location">📍 Toda la provincia</span>
-                                </div>
-                                <p>Servicio técnico oficial en aires acondicionados Split. Mantenimiento, desinstalaciones y recarga de gas garantizada.</p>
-                            </div>
-                            <a href="https://wa.me/5492664212722?text=Hola!%20Los%20vi%20en%20Oficios%20Sierras%20Web%20y%20necesito%20presupuesto%20para%20service%20de%20aire%20acondicionado." class="portfolio-link" target="_blank">Pedir Presupuesto WhatsApp <span>&rarr;</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección Planes para Prestadores -->
-        <section id="planes" class="section">
+        <!-- Sección Contacto Profesionales (Reemplazo de los planes) -->
+        <section id="contacto" class="section bg-gray">
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <h2>¿Ofrecés un oficio? Sumate a Oficios Sierras Web</h2>
                     <p>Digitalizá tu trabajo, conseguí clientes todos los días y mostrá tu reputación profesional en internet.</p>
                 </div>
 
-                <div class="pricing-grid">
-                    <!-- Plan Gratuito -->
-                    <div class="price-card" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="price-header">
-                            <h3>Plan Usuario</h3>
-                            <p>Perfecto para vecinos que buscan contratar servicios para su casa.</p>
-                            <div class="price-amount">$0<span>/100% gratis</span></div>
-                        </div>
-                        <ul class="price-features">
-                            <li>Búsqueda ilimitada de profesionales</li>
-                            <li>Calificaciones y opiniones 100% reales</li>
-                            <li>Contacto directo por WhatsApp</li>
-                            <li>Solicitud de múltiples presupuestos</li>
-                            <li>Sin comisiones extras por servicio</li>
-                        </ul>
-                        <a href="https://oficios.sierrasweb.com.ar/categorias" class="btn-outline">Buscar Profesionales</a>
-                    </div>
-
-                    <!-- Plan Prestador Pro -->
-                    <div class="price-card featured" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="price-badge">PARA PROFESIONALES</div>
-                        <div class="price-header">
-                            <h3>Prestador Pro</h3>
-                            <p>Para trabajadores y PyMEs que buscan multiplicar sus trabajos semanales.</p>
-                            <div class="price-amount">$15.000<span>/mes</span></div>
-                        </div>
-                        <ul class="price-features">
-                            <li><strong>Perfil Profesional Verificado ✓</strong></li>
-                            <li>Galería ilimitada de fotos de trabajos</li>
-                            <li>Aparición prioritaria en el buscador</li>
-                            <li>Contacto directo a tu WhatsApp personal</li>
-                            <li>Herramienta rápida para presupuestos</li>
-                        </ul>
-                        <a href="https://wa.me/5492664212722?text=Hola!%20Quiero%20registrarme%20como%20Prestador%20Pro%20en%20Oficios%20Sierras%20Web" class="btn-outline" target="_blank">Sumarme como Prestador</a>
-                    </div>
-                </div>
-
-                <!-- Banner Web Personalizada opcional -->
                 <div class="domain-box" data-aos="fade-up">
                     <div class="domain-info">
-                        <h4>¿Querés tu propia página web profesional exclusiva?</h4>
-                        <p>Diseñamos sitios web personalizados con tu marca y dominio propio (Ej: <strong>www.tuoficio.com.ar</strong>).</p>
+                        <h4 style="font-size: 1.8rem;">¡Contactate con nuestro equipo!</h4>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 0;">Escribinos para conocer cómo sumar tu perfil y empezar a recibir clientes. Te asesoramos sin cargo sobre todas las ventajas.</p>
                     </div>
-                    <a href="https://wa.me/5492664212722?text=Hola!%20Me%20interesa%20consultar%20por%20una%20p%C3%A1gina%20web%20propia%20para%20mi%20empresa%20de%20servicios" class="btn-domain" target="_blank">Consultar por Web Propia</a>
+                    <a href="https://wa.me/5492664212722?text=Hola!%20Me%20interesa%20ofrecer%20mis%20servicios%20en%20Oficios%20Sierras%20Web" class="btn-domain" target="_blank" style="background: #fff; color: var(--primary-color); font-size: 1.1rem;">
+                        <i class="fab fa-whatsapp"></i> Escribinos por WhatsApp
+                    </a>
                 </div>
             </div>
         </section>
 
         <!-- Preguntas Frecuentes -->
-        <section id="faq" class="section bg-gray">
+        <section id="faq" class="section">
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <h2>Preguntas Frecuentes</h2>
@@ -678,7 +512,7 @@
                     </div>
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
                         <h4>¿Cómo me registro si quiero ofrecer mis servicios?</h4>
-                        <p>Hacé clic en el botón "Ofrecer mi Servicio" o elegí el Plan Prestador Pro. Te solicitaremos datos de validación de identidad para activar tu perfil verificado en menos de 24 horas.</p>
+                        <p>Hacé clic en el botón "Ofrecer mi Servicio" o envianos un mensaje a través de nuestra sección de contacto. Te solicitaremos datos de validación de identidad para activar tu perfil verificado en menos de 24 horas.</p>
                     </div>
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
                         <h4>¿Las opiniones y calificaciones son reales?</h4>
@@ -692,9 +526,9 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <a href="#" class="footer-logo">Oficios <span>Sierras Web</span></a>
+            <a href="https://sierrasweb.com.ar" target="_blank" class="footer-logo">Sierras<span>Web</span></a>
             <p>La red de trabajadores independientes y soluciones para el hogar.</p>
-            <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.7;">© 2026 Oficios Sierras Web. Todos los derechos reservados.</p>
+            <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.7;">© 2026 Sierras Web. Todos los derechos reservados.</p>
         </div>
     </footer>
 
