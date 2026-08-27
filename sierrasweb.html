@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Sierras Web | Oficios Sierras Web</title>
+    <title>Diego Maiorkevich | Oficios Sierras Web</title>
 
     <!-- Google Fonts (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -181,8 +181,8 @@
 
         /* --- FORMULARIOS Y RESEÑAS --- */
         .star-rating {
-            display: flex; /* Asegura que las estrellas sean un contenedor flex */
-            flex-wrap: nowrap; /* Fuerza a las estrellas a estar SIEMPRE en una línea */
+            display: flex; 
+            flex-wrap: nowrap; 
             gap: 5px;
         }
         .text-star { color: var(--star-color) !important; }
@@ -192,6 +192,13 @@
         
         .btn-submit { background-color: var(--primary-color); color: #fff; transition: all 0.3s; border: none;}
         .btn-submit:hover { background-color: var(--primary-dark); color: #fff; transform: translateY(-2px); box-shadow: var(--shadow-md);}
+
+        /* Botón Cargar Más Reseñas */
+        .btn-load-more {
+            background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color);
+            padding: 10px 24px; font-size: 15px; font-weight: 700; border-radius: 10px; cursor: pointer; transition: all 0.3s; width: 100%;
+        }
+        .btn-load-more:hover { background-color: var(--primary-light); }
 
         /* --- FOOTER --- */
         footer { 
@@ -210,30 +217,15 @@
             .theme-toggle-mobile { display: flex !important; position: absolute; right: 20px; top: 19px; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             
-            /* Optimización de espacios para celular */
-            .profile-main-card, .info-card, .review-card { 
-                padding: 28px 20px; 
-            }
-            .profile-avatar-ring {
-                padding: 4px;
-                margin-bottom: 15px;
-            }
-            .profile-avatar { 
-                width: 115px; 
-                height: 115px; 
-            }
-            .profile-name { 
-                font-size: 1.6rem; 
-            }
-            .whatsapp-btn, .phone-btn, .share-profile-btn {
-                padding: 14px 20px;
-                font-size: 15px;
-            }
+            .profile-main-card, .info-card, .review-card { padding: 28px 20px; }
+            .profile-avatar-ring { padding: 4px; margin-bottom: 15px; }
+            .profile-avatar { width: 115px; height: 115px; }
+            .profile-name { font-size: 1.6rem; }
+            .whatsapp-btn, .phone-btn, .share-profile-btn { padding: 14px 20px; font-size: 15px; }
 
-            /* Solución al quiebre de las estrellas */
             .rating-wrapper {
-                flex-direction: column; /* Pone el texto arriba y las estrellas abajo */
-                align-items: flex-start !important; /* Alinea todo a la izquierda */
+                flex-direction: column; 
+                align-items: flex-start !important; 
                 gap: 8px !important;
             }
         }
@@ -244,9 +236,8 @@
     <!-- Navegación -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Oficios<span>SierrasWeb</span></a>
+            <a href="https://oficios.sierrasweb.com.ar" class="logo">Oficios<span>SierrasWeb</span></a>
             
-            <!-- Botón Dark Mode para Móvil -->
             <button id="theme-toggle-mobile" class="theme-toggle theme-toggle-mobile" style="display: none;" aria-label="Cambiar Tema">
                 <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -254,8 +245,8 @@
 
             <!-- Enlaces PC -->
             <ul class="nav-links">
-                <li><a href="oficios.sierrasweb.com.ar">Inicio</a></li>
-                <li><a href="oficios.sierrasweb.com.ar/cvategorias">Categorias</a></li>
+                <li><a href="https://oficios.sierrasweb.com.ar">Inicio</a></li>
+                <li><a href="https://oficios.sierrasweb.com.ar/categorias">Categorías</a></li>
                 <li><a href="https://wa.me/5492664212722?text=Hola!%20Me%20interesa%20ofrecer%20mis%20servicios%20en%20Oficios%20Sierras%20Web" class="btn-nav" target="_blank">Ofrecer mi Servicio</a></li>
                 <li>
                     <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar Tema">
@@ -346,14 +337,16 @@
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Diseño Mobile-First & Responsivo</li>
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Catálogos Digitales & Portafolios</li>
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Plataformas de Directorio & Clasificados</li>    
-                            
-                            <p style="color: var(--text-gray);">Integraciones & Automatización:</p>
+                        </ul>
+
+                        <p style="color: var(--text-gray);">Integraciones & Automatización:</p>
                         <ul class="list-unstyled" style="color: var(--text-gray);">
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Conexión con WhatsApp Business</li>
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Bases de Datos Ligeras & Serveless</li>
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Sistemas de Reseñas & Reputación</li>
-                            
-                            <p style="color: var(--text-gray);">Diseño de Experiencia & Rendimiento (UI/UX)s:</p>
+                        </ul>
+
+                        <p style="color: var(--text-gray);">Diseño de Experiencia & Rendimiento (UI/UX)s:</p>
                         <ul class="list-unstyled" style="color: var(--text-gray);">
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Modo Claro / Modo Oscuro (Dark Mode)</li>
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Optimización de Carga (WPO)</li>
@@ -396,6 +389,11 @@
                                 <div class="spinner-border text-star" role="status"></div>
                                 <p style="color: var(--text-gray);" class="mt-2">Cargando reseñas...</p>
                             </div>
+                        </div>
+
+                        <!-- Botón Cargar Más Reseñas -->
+                        <div class="mb-4">
+                            <button id="loadMoreReviewsBtn" class="btn-load-more" style="display: none;">Cargar más reseñas</button>
                         </div>
 
                         <!-- Formulario Nueva Opinión -->
@@ -567,12 +565,17 @@
                 if(data.resultado === 'exito') {
                     alert('¡Gracias por tu reseña!');
                     e.target.reset(); currentRating = 0; updateStars(0);
-                    loadReviews();
+                    loadReviews(); // Recarga las reseñas
                 } else { alert('Hubo un problema guardando tu reseña.'); }
             })
             .catch(error => alert('Error de conexión.'))
             .finally(() => { submitBtn.innerText = originalText; submitBtn.disabled = false; });
         });
+
+        // --- LÓGICA DE CARGA Y PAGINACIÓN DE RESEÑAS ---
+        let allLoadedReviews = [];
+        let currentReviewIndex = 0;
+        const REVIEWS_PER_PAGE = 5;
 
         function loadReviews() {
             const container = document.getElementById('reviewsContainer');
@@ -582,51 +585,93 @@
 
             fetch(GOOGLE_SCRIPT_URL).then(r => r.json()).then(data => {
                 if(data.resultado === 'exito') {
-                    const reviews = data.datos;
-                    if(reviews.length === 0) {
+                    allLoadedReviews = data.datos;
+                    
+                    if(allLoadedReviews.length === 0) {
                         container.innerHTML = '<p style="color: var(--text-gray);" class="text-center py-4">Aún no hay reseñas. ¡Sé el primero!</p>';
-                        headerCount.innerText = '(0 reseñas)'; return;
+                        headerCount.innerText = '(0 reseñas)'; 
+                        return;
                     }
 
-                    let totalScore = 0; let html = '';
-                    reviews.forEach(review => {
-                        let rating = parseInt(review.puntuacion) || 0;
-                        totalScore += rating;
-                        let fechaObj = new Date(review.fecha);
-                        let fechaStr = isNaN(fechaObj) ? review.fecha : fechaObj.toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' });
-                        let iniciales = review.nombre.substring(0, 2).toUpperCase();
-
-                        let estrellasHtml = '';
-                        for(let i = 1; i <= 5; i++) { estrellasHtml += (i <= rating) ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>'; }
-
-                        html += `
-                        <div class="review-card mb-4 p-3 shadow-sm text-start">
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="text-white rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 45px; height: 45px; font-weight: bold; background-color: var(--primary-color);">${iniciales}</div>
-                                <div><h5 class="mb-0 fs-6 fw-bold" style="color: var(--text-dark);">${review.nombre}</h5>
-                                <small style="color: var(--text-gray);">${fechaStr}</small></div>
-                            </div>
-                            <div class="text-star mb-2" style="font-size: 14px;">${estrellasHtml}</div>
-                            <p class="mb-0" style="color: var(--text-gray);">${review.resena}</p>
-                        </div>`;
+                    // Calculamos el promedio leyendo TODAS las reseñas
+                    let totalScore = 0;
+                    allLoadedReviews.forEach(review => {
+                        totalScore += parseInt(review.puntuacion) || 0;
                     });
-                    container.innerHTML = html;
 
-                    let average = totalScore / reviews.length;
+                    let average = totalScore / allLoadedReviews.length;
                     headerAvg.innerText = average.toFixed(1);
                     headerAvg.style.display = 'inline-block';
-                    headerCount.innerText = `(${reviews.length} ${reviews.length === 1 ? 'reseña' : 'reseñas'})`;
+                    headerCount.innerText = `(${allLoadedReviews.length} ${allLoadedReviews.length === 1 ? 'reseña' : 'reseñas'})`;
 
-                    let headerStarsHtml = ''; let fullStars = Math.floor(average); let hasHalfStar = (average - fullStars) >= 0.5;
+                    let headerStarsHtml = ''; 
+                    let fullStars = Math.floor(average); 
+                    let hasHalfStar = (average - fullStars) >= 0.5;
                     for (let i = 1; i <= 5; i++) {
                         if (i <= fullStars) headerStarsHtml += '<i class="fas fa-star"></i>';
                         else if (i === fullStars + 1 && hasHalfStar) headerStarsHtml += '<i class="fas fa-star-half-alt"></i>';
                         else headerStarsHtml += '<i class="far fa-star"></i>';
                     }
                     headerStars.innerHTML = headerStarsHtml;
-                } else container.innerHTML = '<p class="text-danger">Error al cargar.</p>';
+
+                    // Limpiamos el contenedor (para borrar el spinner) y mostramos las primeras
+                    container.innerHTML = '';
+                    currentReviewIndex = 0;
+                    renderNextReviews();
+
+                } else { 
+                    container.innerHTML = '<p class="text-danger">Error al cargar.</p>'; 
+                }
             }).catch(() => container.innerHTML = '<p class="text-danger">Error de conexión.</p>');
         }
+
+        // Función para renderizar el siguiente lote de reseñas
+        function renderNextReviews() {
+            const container = document.getElementById('reviewsContainer');
+            const btnLoadMore = document.getElementById('loadMoreReviewsBtn');
+            
+            let html = '';
+            let nextIndex = currentReviewIndex + REVIEWS_PER_PAGE;
+            // Cortamos el array para tomar solo las siguientes 5
+            let reviewsToRender = allLoadedReviews.slice(currentReviewIndex, nextIndex);
+
+            reviewsToRender.forEach(review => {
+                let rating = parseInt(review.puntuacion) || 0;
+                let fechaObj = new Date(review.fecha);
+                let fechaStr = isNaN(fechaObj) ? review.fecha : fechaObj.toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' });
+                let iniciales = review.nombre.substring(0, 2).toUpperCase();
+
+                let estrellasHtml = '';
+                for(let i = 1; i <= 5; i++) { estrellasHtml += (i <= rating) ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>'; }
+
+                html += `
+                <div class="review-card mb-4 p-3 shadow-sm text-start" style="animation: fadeIn 0.4s ease;">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="text-white rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 45px; height: 45px; font-weight: bold; background-color: var(--primary-color);">${iniciales}</div>
+                        <div><h5 class="mb-0 fs-6 fw-bold" style="color: var(--text-dark);">${review.nombre}</h5>
+                        <small style="color: var(--text-gray);">${fechaStr}</small></div>
+                    </div>
+                    <div class="text-star mb-2" style="font-size: 14px;">${estrellasHtml}</div>
+                    <p class="mb-0" style="color: var(--text-gray);">${review.resena}</p>
+                </div>`;
+            });
+
+            // Agregamos las nuevas reseñas debajo de las que ya estaban
+            container.innerHTML += html;
+            currentReviewIndex = nextIndex;
+
+            // Mostramos u ocultamos el botón dependiendo de si quedan más por cargar
+            if (currentReviewIndex >= allLoadedReviews.length) {
+                btnLoadMore.style.display = 'none';
+            } else {
+                btnLoadMore.style.display = 'block';
+            }
+        }
+
+        // Conectamos el botón a la función
+        document.getElementById('loadMoreReviewsBtn').addEventListener('click', renderNextReviews);
+
+        // Inicializamos la carga al entrar a la página
         document.addEventListener('DOMContentLoaded', loadReviews);
 
         // --- LÓGICA GALERÍA MAGNIFIC POPUP ---
