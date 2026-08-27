@@ -101,7 +101,7 @@
         .profile-main-card, .info-card, .review-card { 
             background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); 
             padding: 40px 30px; text-align: center; border: 1px solid var(--border-color);
-            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+            transition: background-color var(--transition-speed), border-color var(--transition-speed), padding var(--transition-speed);
         }
         .info-card { text-align: left; margin-top: 24px; padding: 32px; border-radius: var(--radius-md); box-shadow: var(--shadow-md);}
         
@@ -110,8 +110,9 @@
             display: inline-block; border-radius: 50%; padding: 5px; 
             background: linear-gradient(140deg, var(--primary-color), var(--primary-light), var(--primary-dark));
             box-shadow: 0 0 0 6px var(--white), var(--shadow-md); margin-bottom: 20px;
+            transition: all var(--transition-speed);
         }
-        .profile-avatar { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--white); object-fit: cover; background: var(--white); }
+        .profile-avatar { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--white); object-fit: cover; background: var(--white); transition: all var(--transition-speed); }
         
         .profile-name { font-size: 28px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; letter-spacing: -0.5px;}
         .profile-service-name { font-size: 16px; color: var(--text-gray); margin-bottom: 8px; }
@@ -179,6 +180,11 @@
         .gallery-item:hover img { transform: scale(1.1); }
 
         /* --- FORMULARIOS Y RESEÑAS --- */
+        .star-rating {
+            display: flex; /* Asegura que las estrellas sean un contenedor flex */
+            flex-wrap: nowrap; /* Fuerza a las estrellas a estar SIEMPRE en una línea */
+            gap: 5px;
+        }
         .text-star { color: var(--star-color) !important; }
         .form-control { background-color: var(--bg-light); border: 1px solid var(--border-color); color: var(--text-dark); transition: all 0.3s;}
         .form-control:focus { background-color: var(--white); border-color: var(--primary-color); box-shadow: 0 0 0 3px var(--primary-light); color: var(--text-dark);}
@@ -198,11 +204,38 @@
         .footer-logo span { color: var(--primary-color); }
         .footer-copyright { font-size: 0.85rem; margin-top: 20px; opacity: 0.8; }
 
-        /* --- Ajustes Mobile --- */
+        /* --- AJUSTES PROFESIONALES MOBILE --- */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .theme-toggle-mobile { display: flex !important; position: absolute; right: 20px; top: 19px; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            
+            /* Optimización de espacios para celular */
+            .profile-main-card, .info-card, .review-card { 
+                padding: 28px 20px; 
+            }
+            .profile-avatar-ring {
+                padding: 4px;
+                margin-bottom: 15px;
+            }
+            .profile-avatar { 
+                width: 115px; 
+                height: 115px; 
+            }
+            .profile-name { 
+                font-size: 1.6rem; 
+            }
+            .whatsapp-btn, .phone-btn, .share-profile-btn {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+
+            /* Solución al quiebre de las estrellas */
+            .rating-wrapper {
+                flex-direction: column; /* Pone el texto arriba y las estrellas abajo */
+                align-items: flex-start !important; /* Alinea todo a la izquierda */
+                gap: 8px !important;
+            }
         }
     </style>
 </head>
@@ -266,7 +299,6 @@
                     <div id="header-stars" class="text-star fs-5 d-flex gap-1">
                         <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                     </div>
-                    <!-- Se quitó la clase text-dark para que se adapte al modo oscuro -->
                     <span id="header-rating-avg" class="fw-bold fs-5" style="color: var(--text-dark); display: none;">0.0</span>
                     <span id="header-rating-count" class="text-gray" style="font-size: 14px;">(0 reseñas)</span>
                 </div>
@@ -375,7 +407,8 @@
                                     <textarea id="formResena" class="form-control" rows="4" placeholder="Escribí tu experiencia con este profesional *" required></textarea>
                                 </div>
                                 
-                                <div class="mb-4 d-flex align-items-center gap-3">
+                                <!-- Div con clase .rating-wrapper para aplicar la corrección en móvil -->
+                                <div class="mb-4 d-flex align-items-center gap-3 rating-wrapper">
                                     <label class="fw-bold mb-0" style="color: var(--text-dark);">Tu puntuación:</label>
                                     <div class="star-rating fs-3" style="cursor: pointer; color: var(--border-color);">
                                         <i class="far fa-star" data-rating="1"></i>
