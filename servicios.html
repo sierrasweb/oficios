@@ -140,6 +140,13 @@
             box-shadow: 0 10px 20px -10px rgba(37, 211, 102, 0.5); transition: all 0.3s; border: none;
         }
         .whatsapp-btn:hover { background: #1da851; color: white; transform: translateY(-3px); box-shadow: 0 15px 25px -10px rgba(37, 211, 102, 0.6); }
+
+        .phone-btn {
+            background-color: var(--primary-color); color: white; padding: 16px 32px; font-size: 16px; font-weight: 700;
+            border-radius: 12px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; width: 100%; max-width: 320px; justify-content: center; margin: 10px auto;
+            box-shadow: 0 10px 20px -10px rgba(2, 132, 199, 0.5); transition: all 0.3s; border: none;
+        }
+        .phone-btn:hover { background: var(--primary-dark); color: white; transform: translateY(-3px); box-shadow: 0 15px 25px -10px rgba(2, 132, 199, 0.6); }
         
         .share-profile-btn {
             background: var(--bg-light); color: var(--text-dark); border: 1px solid var(--border-color); padding: 13px 32px;
@@ -259,7 +266,8 @@
                     <div id="header-stars" class="text-star fs-5 d-flex gap-1">
                         <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                     </div>
-                    <span id="header-rating-avg" class="fw-bold fs-5 text-dark" style="display: none;">0.0</span>
+                    <!-- Se quitó la clase text-dark para que se adapte al modo oscuro -->
+                    <span id="header-rating-avg" class="fw-bold fs-5" style="color: var(--text-dark); display: none;">0.0</span>
                     <span id="header-rating-count" class="text-gray" style="font-size: 14px;">(0 reseñas)</span>
                 </div>
 
@@ -267,9 +275,11 @@
                 <a href="https://wa.me/5492615576762" target="_blank" class="whatsapp-btn">
                     <i class="bi bi-whatsapp"></i> Contactar por WhatsApp
                 </a>
-                <a href="tel:+5492664212722" class="share-profile-btn" style="background-color: var(--primary-color); color: white; border: none;">
-    <i class="bi bi-telephone-fill"></i> Llamar al 2664212722
-</a>
+                
+                <a href="tel:+5492664212722" class="phone-btn">
+                    <i class="bi bi-telephone-fill"></i> Llamar al 2664212722
+                </a>
+                
                 <button id="shareProfileBtn" class="share-profile-btn">
                     <i class="bi bi-share-fill"></i> Compartir perfil
                 </button>
