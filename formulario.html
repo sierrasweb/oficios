@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Guía Comechingón</title>
+
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CDNs de Estilos (Bootstrap, Iconos FontAwesome y Bootstrap Icons) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Variables Modo Claro (Sierras Web Design System) */
+        :root {
+            --primary-color: #0284C7; 
+            --primary-dark: #0369A1;
+            --primary-light: rgba(2, 132, 199, 0.1);
+            --text-dark: #0F172A;
+            --text-gray: #475569;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --border-color: #E2E8F0;
+            --pattern-color: #cbd5e1;
+            --wa-green: #25D366;
+            --font-main: 'Inter', sans-serif;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.4s;
+            --radius-md: 16px;
+            --radius-xl: 24px;
+        }
+
+        /* Variables Modo Oscuro */
+        [data-theme="dark"] {
+            --text-dark: #F8FAFC;
+            --text-gray: #94A3B8;
+            --bg-light: #0F172A;
+            --white: #1E293B;
+            --nav-bg: rgba(30, 41, 59, 0.85);
+            --border-color: #334155;
+            --pattern-color: #334155;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            --primary-light: rgba(2, 132, 199, 0.2);
+        }
+
+        * { font-family: var(--font-main); }
+        
+        body { 
+            color: var(--text-dark); 
+            background-color: var(--bg-light); 
+            transition: background-color var(--transition-speed), color var(--transition-speed); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* --- NAVEGACIÓN --- */
+        .navbar {
+            position: fixed; width: 100%; top: 0; background-color: var(--nav-bg);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            z-index: 1000; border-bottom: 1px solid var(--border-color); 
+            transition: all var(--transition-speed);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; width: 90%; max-width: 1200px; margin: 0 auto;}
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--primary-color); }
+
+        /* --- BOTÓN THEME TOGGLE --- */
+        .theme-toggle {
+            background: var(--bg-light); border: 1px solid var(--border-color); cursor: pointer;
+            width: 42px; height: 42px; border-radius: 50%; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+        }
+        .theme-toggle svg { position: absolute; width: 20px; height: 20px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .moon-icon { opacity: 1; transform: translateY(0) rotate(0deg); color: var(--text-gray); }
+        .sun-icon { opacity: 0; transform: translateY(30px) rotate(45deg); color: #F59E0B; }
+        [data-theme="dark"] .moon-icon { opacity: 0; transform: translateY(-30px) rotate(-45deg); }
+        [data-theme="dark"] .sun-icon { opacity: 1; transform: translateY(0) rotate(0deg); }
+
+        /* --- SECCIÓN PRINCIPAL Y CONTENEDOR --- */
+        .main-section {
+            padding: 120px 0 60px; 
+            background-image: radial-gradient(var(--pattern-color) 1.5px, transparent 1.5px);
+            background-size: 35px 35px;
+            flex: 1;
+        }
+        .form-wrap { max-width: 780px; margin: 0 auto; }
+
+        .form-card { 
+            background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); 
+            padding: 40px; border: 1px solid var(--border-color);
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+        }
+
+        /* --- CAMPOS Y ESTILOS DE FORMULARIO --- */
+        .form-header-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+        .form-section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .form-control { 
+            background-color: var(--bg-light); 
+            border: 1px solid var(--border-color); 
+            color: var(--text-dark); 
+            padding: 11px 16px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        .form-control:focus { 
+            background-color: var(--white); 
+            border-color: var(--primary-color); 
+            box-shadow: 0 0 0 3px var(--primary-light); 
+            color: var(--text-dark);
+        }
+        .form-control::placeholder { color: var(--text-gray); opacity: 0.7; }
+        
+        /* Input de archivos */
+        input[type="file"].form-control {
+            padding: 9px 12px;
+        }
+        input[type="file"]::file-selector-button {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            border: none;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-right: 10px;
+            transition: all 0.2s;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Botón Guardar / Enviar */
+        .btn-submit { 
+            background-color: var(--primary-color); 
+            color: #fff; 
+            font-weight: 700;
+            padding: 14px 24px;
+            font-size: 1rem;
+            border-radius: 12px;
+            border: none;
+            width: 100%;
+            box-shadow: 0 10px 20px -10px rgba(2, 132, 199, 0.5);
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        .btn-submit:hover { 
+            background-color: var(--primary-dark); 
+            color: #fff; 
+            transform: translateY(-2px); 
+            box-shadow: 0 15px 25px -10px rgba(2, 132, 199, 0.6);
+        }
+        .btn-submit:disabled {
+            background-color: var(--text-gray);
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* --- ALERTA DE ESTADO --- */
+        #estado {
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: center;
+            display: none;
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            padding: 40px 0; 
+            text-align: center; 
+            color: var(--text-gray); 
+            background-color: var(--white); 
+            border-top: 1px solid var(--border-color); 
+            transition: all var(--transition-speed); 
+        }
+        .footer-logo { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); text-decoration: none; letter-spacing: -0.5px; }
+        .footer-logo span { color: var(--primary-color); }
+
+        @media (max-width: 768px) {
+            .form-card { padding: 25px 20px; }
+            .form-header-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Guía<span>Comechingón</span></a>
+            
+            <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar Tema">
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="main-section">
+        <div class="container form-wrap">
+            <div class="form-card">
+                
+                <div class="text-center mb-4">
+                    <h1 class="form-header-title">Registro de Oficio</h1>
+                    <p class="text-secondary" style="color: var(--text-gray) !important;">Completa los datos de tu emprendimiento para sumarte a la guía digital.</p>
+                </div>
+
+                <form id="formGuia">
+                    
+                    <!-- DATOS PRINCIPALES -->
+                    <div class="form-section-title">
+                        <i class="bi bi-person-vcard"></i> Datos Principales
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="dueno">Nombre del dueño del oficio *</label>
+                            <input type="text" id="dueno" class="form-control" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="nombreOficio">Nombre del oficio / Emprendimiento *</label>
+                            <input type="text" id="nombreOficio" class="form-control" placeholder="Ej. Electrónica San Luis" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="localidad">Localidad y provincia *</label>
+                            <input type="text" id="localidad" class="form-control" placeholder="Ej. Merlo, San Luis" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="tipoOficios">Tipo de oficios (Categoría) *</label>
+                            <input type="text" id="tipoOficios" class="form-control" placeholder="Ej. Plomería, Gasista, Electricidad" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="whatsapp">Teléfono para WhatsApp *</label>
+                            <input type="tel" id="whatsapp" class="form-control" placeholder="Ej. 2664000000" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="llamadas">Número para llamadas</label>
+                            <input type="tel" id="llamadas" class="form-control" placeholder="Ej. 2664000000">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="descripcion">Descripción del servicio que hace *</label>
+                            <textarea id="descripcion" class="form-control" rows="4" placeholder="Detalla los servicios, especialidades y horarios..." required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- REDES SOCIALES Y ENLACES -->
+                    <div class="form-section-title mt-4">
+                        <i class="bi bi-share"></i> Redes Sociales y Enlaces
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="instagram"><i class="fab fa-instagram text-danger me-1"></i> Instagram</label>
+                            <input type="url" id="instagram" class="form-control" placeholder="https://instagram.com/tu-usuario">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="facebook"><i class="fab fa-facebook text-primary me-1"></i> Facebook</label>
+                            <input type="url" id="facebook" class="form-control" placeholder="https://facebook.com/tu-pagina">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="youtube"><i class="fab fa-youtube text-danger me-1"></i> YouTube</label>
+                            <input type="url" id="youtube" class="form-control" placeholder="https://youtube.com/@tu-canal">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="linkedin"><i class="fab fa-linkedin text-primary me-1"></i> LinkedIn</label>
+                            <input type="url" id="linkedin" class="form-control" placeholder="https://linkedin.com/in/tu-perfil">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="tiktok"><i class="fab fa-tiktok text-dark me-1"></i> TikTok</label>
+                            <input type="url" id="tiktok" class="form-control" placeholder="https://tiktok.com/@tu-usuario">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="web"><i class="bi bi-globe me-1"></i> Página Web</label>
+                            <input type="url" id="web" class="form-control" placeholder="https://tu-sitio-web.com">
+                        </div>
+                    </div>
+
+                    <!-- IMÁGENES -->
+                    <div class="form-section-title mt-4">
+                        <i class="bi bi-images"></i> Imágenes y Trabajos
+                    </div>
+                    <p class="small text-secondary mb-3" style="color: var(--text-gray) !important;">Selecciona las fotos de tu negocio. El logo o foto principal es obligatoria.</p>
+
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label" for="logo">Logo / Imagen de perfil *</label>
+                            <input type="file" id="logo" class="form-control" accept="image/*" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="img1">Imagen Galería 1</label>
+                            <input type="file" id="img1" class="form-control" accept="image/*">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="img2">Imagen Galería 2</label>
+                            <input type="file" id="img2" class="form-control" accept="image/*">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="img3">Imagen Galería 3</label>
+                            <input type="file" id="img3" class="form-control" accept="image/*">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="img4">Imagen Galería 4</label>
+                            <input type="file" id="img4" class="form-control" accept="image/*">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="img5">Imagen Galería 5</label>
+                            <input type="file" id="img5" class="form-control" accept="image/*">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="img6">Imagen Galería 6</label>
+                            <input type="file" id="img6" class="form-control" accept="image/*">
+                        </div>
+                    </div>
+
+                    <!-- BOTÓN Y MENSAJES -->
+                    <div class="mt-4">
+                        <button type="submit" id="btnEnviar" class="btn-submit">
+                            <i class="bi bi-send-fill me-2"></i> Enviar Datos
+                        </button>
+                    </div>
+
+                    <div id="estado" class="mt-3"></div>
+
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">Guía<span>Comechingón</span></a>
+            <p class="mt-2 mb-0" style="font-size: 0.85rem;">Powered by Sierras Web &copy; 2026. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // --- MODO OSCURO (SIERRAS WEB) ---
+        const htmlElement = document.documentElement;
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            htmlElement.setAttribute('data-theme', 'dark');
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                htmlElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+        // --- CONEXIÓN CON GOOGLE APPS SCRIPT Y FORMULARIO ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyJdgrQiLWUzgQXdDTkfzkOVRoY6_JY2Ypxvfutcm2c7_BjfpHeR93NDx7_4JCAX4mLtw/exec'; 
+        const form = document.getElementById('formGuia');
+        const estado = document.getElementById('estado');
+        const btnEnviar = document.getElementById('btnEnviar');
+
+        // Función para leer un archivo y convertirlo a Base64
+        const leerArchivo = (inputFile) => {
+            return new Promise((resolve, reject) => {
+                if (!inputFile || inputFile.files.length === 0) {
+                    resolve(null);
+                    return;
+                }
+                const file = inputFile.files[0];
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve({
+                    base64: reader.result,
+                    nombre: file.name,
+                    mimeType: file.type
+                });
+                reader.onerror = error => reject(error);
+            });
+        };
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            btnEnviar.disabled = true;
+            
+            // Ajustar visualización de estado
+            estado.style.display = "block";
+            estado.className = "alert alert-primary mt-3";
+            estado.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span> Procesando y subiendo archivos... Esto puede demorar unos segundos.';
+
+            try {
+                // Leer todas las imágenes en paralelo
+                const [logo, img1, img2, img3, img4, img5, img6] = await Promise.all([
+                    leerArchivo(document.getElementById('logo')),
+                    leerArchivo(document.getElementById('img1')),
+                    leerArchivo(document.getElementById('img2')),
+                    leerArchivo(document.getElementById('img3')),
+                    leerArchivo(document.getElementById('img4')),
+                    leerArchivo(document.getElementById('img5')),
+                    leerArchivo(document.getElementById('img6'))
+                ]);
+
+                // Construir el paquete de datos
+                const payload = {
+                    dueno: document.getElementById('dueno').value,
+                    nombreOficio: document.getElementById('nombreOficio').value,
+                    localidad: document.getElementById('localidad').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    llamadas: document.getElementById('llamadas').value,
+                    descripcion: document.getElementById('descripcion').value,
+                    tipoOficios: document.getElementById('tipoOficios').value,
+                    instagram: document.getElementById('instagram').value,
+                    facebook: document.getElementById('facebook').value,
+                    youtube: document.getElementById('youtube').value,
+                    linkedin: document.getElementById('linkedin').value,
+                    tiktok: document.getElementById('tiktok').value,
+                    web: document.getElementById('web').value,
+                    logo, img1, img2, img3, img4, img5, img6
+                };
+
+                // Enviar a Google
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+                
+                const res = await response.json();
+
+                if (res.result === "success") {
+                    estado.className = "alert alert-success mt-3";
+                    estado.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> ¡Enviado con éxito! Los datos y fotos se han guardado.';
+                    form.reset();
+                } else {
+                    throw new Error(res.error);
+                }
+            } catch (err) {
+                estado.className = "alert alert-danger mt-3";
+                estado.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i> Error al enviar. Intenta de nuevo.';
+                console.error(err);
+            } finally {
+                btnEnviar.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
