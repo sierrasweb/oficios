@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.css" />
 
     <style>
         /* Variables Modo Claro (Basado en Sierras Web) */
@@ -172,145 +172,19 @@
         .ptab-panel.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- GALERÍA PROFESIONAL --- */
+        /* --- GALERÍA --- */
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        
-        .gallery-item { 
-            position: relative;
-            aspect-ratio: 1; 
-            border-radius: var(--radius-md); 
-            overflow: hidden; 
-            border: 1px solid var(--border-color);
-            background: var(--bg-light);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.15);
-            border-color: var(--primary-color);
-        }
-
-        .gallery-item a { 
-            display: block; 
-            width: 100%; 
-            height: 100%; 
-            position: relative;
-        }
-
-        .gallery-item img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
-        }
-
-        .gallery-item:hover img { 
-            transform: scale(1.08); 
-        }
-
-        /* Capa Hover con Ícono de Zoom */
-        .gallery-item a::after {
-            content: "\F62D";
-            font-family: "bootstrap-icons";
-            position: absolute;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.45);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 1.8rem;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .gallery-item:hover a::after {
-            opacity: 1;
-        }
-
-        /* --- ESTILOS PERSONALIZADOS LIGHTBOX (MAGNIFIC POPUP) --- */
-        .mfp-bg {
-            background: rgba(15, 23, 42, 0.88) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .mfp-bg.mfp-ready { opacity: 1; }
-        .mfp-bg.mfp-removing { opacity: 0; }
-
-        .mfp-wrap .mfp-content {
-            opacity: 0;
-            transform: scale(0.92);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .mfp-wrap.mfp-ready .mfp-content {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .mfp-wrap.mfp-removing .mfp-content {
-            opacity: 0;
-            transform: scale(0.92);
-        }
-
-        .mfp-figure img.mfp-img {
-            padding: 0 !important;
-            border-radius: 16px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mfp-figure::after {
-            box-shadow: none !important;
-        }
-
-        .mfp-bottom-bar {
-            margin-top: -36px !important;
-            padding: 10px 14px !important;
-            background: rgba(0, 0, 0, 0.5) !important;
-            backdrop-filter: blur(8px);
-            border-radius: 0 0 16px 16px;
-        }
-
-        .mfp-title {
-            color: #f8fafc !important;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .mfp-counter {
-            color: #94a3b8 !important;
-            font-size: 0.85rem;
-        }
-
-        /* Botón de cierre y flechas estilizadas */
-        .mfp-image-holder .mfp-close {
-            color: #fff !important;
-            right: -12px;
-            top: -46px;
-            padding-right: 0;
-            width: 38px;
-            height: 38px;
-            line-height: 38px;
-            background: rgba(255, 255, 255, 0.15) !important;
-            backdrop-filter: blur(6px);
-            border-radius: 50%;
-            opacity: 0.85;
-            transition: all 0.2s ease;
-        }
-
-        .mfp-image-holder .mfp-close:hover {
-            opacity: 1;
-            background: rgba(255, 255, 255, 0.3) !important;
-            transform: scale(1.1);
-        }
+        .gallery-item { aspect-ratio: 1; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);}
+        .gallery-item a { display: block; width: 100%; height: 100%; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
 
         /* --- FORMULARIOS Y RESEÑAS --- */
-        .star-rating { display: flex; flex-wrap: nowrap; gap: 5px; }
+        .star-rating {
+            display: flex; 
+            flex-wrap: nowrap; 
+            gap: 5px;
+        }
         .text-star { color: var(--star-color) !important; }
         .form-control { background-color: var(--bg-light); border: 1px solid var(--border-color); color: var(--text-dark); transition: all 0.3s;}
         .form-control:focus { background-color: var(--white); border-color: var(--primary-color); box-shadow: 0 0 0 3px var(--primary-light); color: var(--text-dark);}
@@ -319,6 +193,7 @@
         .btn-submit { background-color: var(--primary-color); color: #fff; transition: all 0.3s; border: none;}
         .btn-submit:hover { background-color: var(--primary-dark); color: #fff; transform: translateY(-2px); box-shadow: var(--shadow-md);}
 
+        /* Botón Cargar Más Reseñas */
         .btn-load-more {
             background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color);
             padding: 10px 24px; font-size: 15px; font-weight: 700; border-radius: 10px; cursor: pointer; transition: all 0.3s; width: 100%;
@@ -335,6 +210,11 @@
         .footer-logo:hover { transform: scale(1.05); }
         .footer-logo span { color: var(--primary-color); }
         .footer-copyright { font-size: 0.85rem; margin-top: 20px; opacity: 0.8; }
+
+        /* Oculta la barra inferior (títulos y contadores) en el visor Magnific Popup */
+        .mfp-bottom-bar {
+            display: none !important;
+        }
 
         /* --- AJUSTES PROFESIONALES MOBILE --- */
         @media (max-width: 768px) {
@@ -401,7 +281,7 @@
                     <i class="bi bi-patch-check-fill"></i> Profesional verificado
                 </div>
 
-                <!-- REDES SOCIALES -->
+                <!-- REDES SOCIALES (Pegar URLs aquí) -->
                 <div id="social-links" class="d-flex justify-content-center gap-2 mb-3">
                     <a href="" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
                     <a href="" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
@@ -473,7 +353,6 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Aire acondicionado</li>
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Heladeras</li>   
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> Camas en frío</li>
-                        </ul>
                     </div>
                 </div>
 
@@ -482,28 +361,28 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                     <div class="info-card">
                         <div class="gallery-grid">
                             <div class="gallery-item">
-                                <a href="https://lh3.googleusercontent.com/d/1QCk12DAHhSrZieFvoiMrWaGNYyz0rO1C" title="Trabajos de Construcción">
-                                    <img src="https://lh3.googleusercontent.com/d/1QCk12DAHhSrZieFvoiMrWaGNYyz0rO1C" alt="Trabajo realizado 1">
+                                <a href="https://lh3.googleusercontent.com/d/1QCk12DAHhSrZieFvoiMrWaGNYyz0rO1C">
+                                    <img src="https://lh3.googleusercontent.com/d/1QCk12DAHhSrZieFvoiMrWaGNYyz0rO1C" alt="Trabajo">
                                 </a>
                             </div>
                             <div class="gallery-item">
-                                <a href="https://lh3.googleusercontent.com/d/1ulVHetltNpkO6yNIdLmhKTuzuQweD_Nm" title="Estructuras y Obras">
-                                    <img src="https://lh3.googleusercontent.com/d/1ulVHetltNpkO6yNIdLmhKTuzuQweD_Nm" alt="Trabajo realizado 2">
+                                <a href="https://lh3.googleusercontent.com/d/1ulVHetltNpkO6yNIdLmhKTuzuQweD_Nm">
+                                    <img src="https://lh3.googleusercontent.com/d/1ulVHetltNpkO6yNIdLmhKTuzuQweD_Nm" alt="Trabajo">
                                 </a>
                             </div>
                             <div class="gallery-item">
-                                <a href="https://lh3.googleusercontent.com/d/186pgdMrGuWxkU-nOr8kkXfOgEyimCNXG" title="Detalle de Obra">
-                                    <img src="https://lh3.googleusercontent.com/d/186pgdMrGuWxkU-nOr8kkXfOgEyimCNXG" alt="Trabajo realizado 3">
+                                <a href="https://lh3.googleusercontent.com/d/186pgdMrGuWxkU-nOr8kkXfOgEyimCNXG">
+                                    <img src="https://lh3.googleusercontent.com/d/186pgdMrGuWxkU-nOr8kkXfOgEyimCNXG" alt="Trabajo">
                                 </a>
                             </div>
-                            <div class="gallery-item">
-                                <a href="https://lh3.googleusercontent.com/d/1wU-WLbb-XEfygOMcHH6r7nADHQ9dbdVj" title="Instalación y Pintura">
-                                    <img src="https://lh3.googleusercontent.com/d/1wU-WLbb-XEfygOMcHH6r7nADHQ9dbdVj" alt="Trabajo realizado 4">
+                          <div class="gallery-item">
+                                <a href="https://lh3.googleusercontent.com/d/1wU-WLbb-XEfygOMcHH6r7nADHQ9dbdVj">
+                                    <img src="https://lh3.googleusercontent.com/d/1wU-WLbb-XEfygOMcHH6r7nADHQ9dbdVj" alt="Trabajo">
                                 </a>
                             </div>
-                            <div class="gallery-item">
-                                <a href="https://lh3.googleusercontent.com/d/1GOap0DzE0HgTUvSINa6BqJZz-Z_iK_Sk" title="Terminaciones finales">
-                                    <img src="https://lh3.googleusercontent.com/d/1GOap0DzE0HgTUvSINa6BqJZz-Z_iK_Sk" alt="Trabajo realizado 5">
+                          <div class="gallery-item">
+                                <a href="https://lh3.googleusercontent.com/d/1GOap0DzE0HgTUvSINa6BqJZz-Z_iK_Sk">
+                                    <img src="https://lh3.googleusercontent.com/d/1GOap0DzE0HgTUvSINa6BqJZz-Z_iK_Sk" alt="Trabajo">
                                 </a>
                             </div>
                         </div>
@@ -531,7 +410,7 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                         <!-- Formulario Nueva Opinión -->
                         <div class="mt-4 pt-4 border-top" style="border-color: var(--border-color) !important;">
                             <h4 class="fs-5 fw-bold mb-3" style="color: var(--text-dark);">Dejá tu opinión</h4>
-                            <p style="color: var(--text-gray);" class="small mb-4">Tu dirección de correo electrónico no será publicada ni tu teléfono.</p>
+                            <p style="color: var(--text-gray);" class="small mb-4">Tu dirección de correo electrónico no será publicada ni tu telefono.</p>
                             
                             <form id="reviewForm">
                                 <div class="row g-3 mb-3">
@@ -549,6 +428,7 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                                     <textarea id="formResena" class="form-control" rows="4" placeholder="Escribí tu experiencia con este profesional *" required></textarea>
                                 </div>
                                 
+                                <!-- Div con clase .rating-wrapper para aplicar la corrección en móvil -->
                                 <div class="mb-4 d-flex align-items-center gap-3 rating-wrapper">
                                     <label class="fw-bold mb-0" style="color: var(--text-dark);">Tu puntuación:</label>
                                     <div class="star-rating fs-3" style="cursor: pointer; color: var(--border-color);">
@@ -577,15 +457,16 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
     <!-- Footer -->
     <footer>
         <div class="container">
-            <a href="https://sierrasweb.com.ar" class="footer-logo">Sierras<span>Web</span></a>
+            <a href="sierrasweb.com.ar" class="footer-logo">Sierras<span>Web</span></a>
             <p style="margin-bottom: 5px;">Desarrollo y Diseño Web Profesional.</p>
             <p class="footer-copyright">&copy; 2026 Sierras Web. Todos los derechos reservados.</p>
         </div>
     </footer>
 
+
     <!-- Scripts Esenciales -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js"></script>
     
     <script>
         // --- LOGICA MODO OSCURO (SIERRAS WEB) ---
@@ -610,7 +491,7 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
         document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
         document.getElementById('theme-toggle-mobile').addEventListener('click', toggleTheme);
 
-        // --- LÓGICA REDES SOCIALES ---
+        // --- LÓGICA REDES SOCIALES (Ocultar si están vacíos) ---
         document.querySelectorAll('.social-btn').forEach(btn => {
             const url = btn.getAttribute('href');
             if (!url || url === '#' || url.trim() === '') {
@@ -623,7 +504,7 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
             const url = window.location.href;
             if (navigator.share) {
                 navigator.share({
-                    title: 'Perfil de EJP_CONSTRUCCIONES',
+                    title: 'Perfil de Diego Maiorkevich',
                     text: 'Te recomiendo este profesional',
                     url: url
                 }).catch(console.error);
@@ -695,7 +576,7 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                 if(data.resultado === 'exito') {
                     alert('¡Gracias por tu reseña!');
                     e.target.reset(); currentRating = 0; updateStars(0);
-                    loadReviews();
+                    loadReviews(); // Recarga las reseñas
                 } else { alert('Hubo un problema guardando tu reseña.'); }
             })
             .catch(error => alert('Error de conexión.'))
@@ -723,6 +604,7 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                         return;
                     }
 
+                    // Calculamos el promedio leyendo TODAS las reseñas
                     let totalScore = 0;
                     allLoadedReviews.forEach(review => {
                         totalScore += parseInt(review.puntuacion) || 0;
@@ -743,6 +625,7 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                     }
                     headerStars.innerHTML = headerStarsHtml;
 
+                    // Limpiamos el contenedor (para borrar el spinner) y mostramos las primeras
                     container.innerHTML = '';
                     currentReviewIndex = 0;
                     renderNextReviews();
@@ -753,12 +636,14 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
             }).catch(() => container.innerHTML = '<p class="text-danger">Error de conexión.</p>');
         }
 
+        // Función para renderizar el siguiente lote de reseñas
         function renderNextReviews() {
             const container = document.getElementById('reviewsContainer');
             const btnLoadMore = document.getElementById('loadMoreReviewsBtn');
             
             let html = '';
             let nextIndex = currentReviewIndex + REVIEWS_PER_PAGE;
+            // Cortamos el array para tomar solo las siguientes 5
             let reviewsToRender = allLoadedReviews.slice(currentReviewIndex, nextIndex);
 
             reviewsToRender.forEach(review => {
@@ -782,9 +667,11 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                 </div>`;
             });
 
+            // Agregamos las nuevas reseñas debajo de las que ya estaban
             container.innerHTML += html;
             currentReviewIndex = nextIndex;
 
+            // Mostramos u ocultamos el botón dependiendo de si quedan más por cargar
             if (currentReviewIndex >= allLoadedReviews.length) {
                 btnLoadMore.style.display = 'none';
             } else {
@@ -792,10 +679,13 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
             }
         }
 
+        // Conectamos el botón a la función
         document.getElementById('loadMoreReviewsBtn').addEventListener('click', renderNextReviews);
+
+        // Inicializamos la carga al entrar a la página
         document.addEventListener('DOMContentLoaded', loadReviews);
 
-        // --- LÓGICA GALERÍA MAGNIFIC POPUP (MEJORADA Y PROFESIONAL) ---
+        // --- LÓGICA GALERÍA MAGNIFIC POPUP (CON SWIPE TÁCTIL Y SIN TÍTULO) ---
         $(document).ready(function() {
             $('.gallery-grid').magnificPopup({
                 delegate: 'a',
@@ -805,15 +695,43 @@ Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros
                 gallery: {
                     enabled: true,
                     navigateByImgClick: true,
-                    preload: [0, 1],
-                    tPrev: 'Anterior',
-                    tNext: 'Siguiente',
-                    tCounter: '<span class="mfp-counter">%curr% de %total%</span>'
+                    preload: [0, 1]
                 },
                 image: {
                     tError: '<a href="%url%">La imagen</a> no pudo ser cargada.',
-                    titleSrc: function(item) {
-                        return item.el.attr('title') || 'Trabajo realizado por EJP_CONSTRUCCIONES';
+                    titleSrc: function() {
+                        return ''; // Vaciamos el título por seguridad
+                    }
+                },
+                callbacks: {
+                    // Función de deslizar (swipe) al abrir la foto
+                    open: function() {
+                        var startX = 0;
+                        var endX = 0;
+                        
+                        // Detecta donde empieza el toque
+                        $('.mfp-wrap').on('touchstart', function(event) {
+                            startX = event.originalEvent.touches[0].clientX;
+                        });
+                        
+                        // Detecta donde termina el toque y calcula el movimiento
+                        $('.mfp-wrap').on('touchend', function(event) {
+                            endX = event.originalEvent.changedTouches[0].clientX;
+                            handleSwipe();
+                        });
+
+                        function handleSwipe() {
+                            var swipeDistance = startX - endX;
+                            var threshold = 50; // Píxeles mínimos de deslizamiento
+
+                            if (swipeDistance > threshold) {
+                                // Deslizó a la izquierda -> Siguiente foto
+                                $.magnificPopup.instance.next();
+                            } else if (swipeDistance < -threshold) {
+                                // Deslizó a la derecha -> Foto anterior
+                                $.magnificPopup.instance.prev();
+                            }
+                        }
                     }
                 }
             });
