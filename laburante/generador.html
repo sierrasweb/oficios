@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Gráficas - Laburando</title>
+  <style>
+    /* 
+      1. VARIABLES DE MARCA 
+      Reemplaza estos colores y fuentes por los exactos de laburando.sierrasweb.com.ar 
+    */
+    :root {
+      --color-primario: #0056b3; /* Cambiar por tu color */
+      --color-secundario: #f8f9fa; /* Cambiar por tu color */
+      --color-texto: #333333;
+      --fuente-principal: 'Arial', sans-serif; /* Cambiar por tu fuente (ej. Poppins, Roboto) */
+    }
+
+    body {
+      font-family: var(--fuente-principal);
+      background: #f0f0f0;
+      color: var(--color-texto);
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* --- UI DE CONTROLES (Solo visible en pantalla) --- */
+    .controles {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: 0 auto 30px auto;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .controles h2 { margin-top: 0; color: var(--color-primario); }
+    .grupo-form { margin-bottom: 15px; }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: var(--color-primario);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+    .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+
+    /* --- ZONA DE IMPRESIÓN (Oculta por defecto en pantalla, visible al imprimir) --- */
+    #zona-impresion { display: none; }
+
+    /* --- REGLAS ESTRICTAS DE IMPRESIÓN --- */
+    @media print {
+      /* Ocultar interfaz */
+      .controles { display: none !important; }
+      body { background: white; padding: 0; margin: 0; }
+      
+      /* Mostrar zona de impresión */
+      #zona-impresion { display: block; }
+      
+      @page { margin: 0; } /* Quita márgenes del navegador */
+
+      /* Plantilla A4 */
+      .formato-a4 {
+        width: 210mm;
+        height: 297mm;
+        padding: 20mm;
+        box-sizing: border-box;
+        text-align: center;
+        background: var(--color-secundario);
+        page-break-after: always;
+      }
+      .formato-a4 h1 { font-size: 48px; color: var(--color-primario); margin-bottom: 10px; }
+      .formato-a4 .rubro { font-size: 24px; color: #666; margin-bottom: 40px; }
+      .formato-a4 img.qr { width: 120mm; height: 120mm; margin: 20px auto; border: 5px solid var(--color-primario); border-radius: 10px;}
+      .formato-a4 p.cta { font-size: 28px; font-weight: bold; margin-top: 30px; }
+
+      /* Plantilla Tarjetas (10 por hoja A4) */
+      .formato-tarjetas {
+        width: 210mm;
+        min-height: 297mm;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 54mm; /* Alto estándar de tarjeta + margen de corte */
+        padding: 10mm;
+        box-sizing: border-box;
+      }
+      .tarjeta {
+        width: 90mm;
+        height: 50mm;
+        margin: auto;
+        border: 1px dashed #bbb; /* Guía de corte */
+        background: var(--color-secundario);
+        display: flex;
+        align-items: center;
+        padding: 5mm;
+        box-sizing: border-box;
+      }
+      .tarjeta-info { flex: 1; padding-right: 10px; }
+      .tarjeta h3 { font-size: 16px; color: var(--color-primario); margin: 0 0 5px 0; }
+      .tarjeta p { font-size: 11px; margin: 0; color: #555; }
+      .tarjeta img.qr { width: 30mm; height: 30mm; border: 2px solid var(--color-primario); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Interfaz de Usuario -->
+  <div class="controles no-print">
+    <h2>Imprimir Perfiles Laburando</h2>
+    
+    <div class="grupo-form">
+      <label for="select-laburante"><strong>1. Selecciona el Laburante:</strong></label>
+      <select id="select-laburante">
+        <option value="">-- Elige una opción --</option>
+        <!-- En tu sistema real, esto se llena dinámicamente desde la BD o Google Sheets -->
+        <option value="ejp_construcciones" data-nombre="EJP Construcciones" data-rubro="Albañilería y Reformas">EJP Construcciones</option>
+        <option value="plomeria_perez" data-nombre="Plomería Pérez" data-rubro="Instalaciones y Reparaciones">Plomería Pérez</option>
+      </select>
+    </div>
+
+    <div class="grupo-form btn-group">
+      <button id="btn-a4" disabled onclick="prepararImpresion('a4')">Imprimir Cartel A4</button>
+      <button id="btn-tarjetas" disabled onclick="prepararImpresion('tarjetas')">Imprimir Tarjetas (x10)</button>
+    </div>
+  </div>
+
+  <!-- 2. Contenedor de Impresión (Se inyecta por JS) -->
+  <div id="zona-impresion"></div>
+
+  <script>
+    const select = document.getElementById('select-laburante');
+    const btnA4 = document.getElementById('btn-a4');
+    const btnTarjetas = document.getElementById('btn-tarjetas');
+    const zonaImpresion = document.getElementById('zona-impresion');
+
+    // Habilitar botones solo cuando hay alguien seleccionado
+    select.addEventListener('change', (e) => {
+      const seleccionado = e.target.value !== "";
+      btnA4.disabled = !seleccionado;
+      btnTarjetas.disabled = !seleccionado;
+    });
+
+    function prepararImpresion(formato) {
+      const option = select.options[select.selectedIndex];
+      const id = option.value;
+      const nombre = option.getAttribute('data-nombre');
+      const rubro = option.getAttribute('data-rubro');
+      
+      // Armamos la URL del perfil real
+      const urlPerfil = `https://laburando.sierrasweb.com.ar/laburante/perfil.html?id=${id}`;
+      // Usamos una API gratuita para generar el QR al instante basado en la URL
+      const urlQR = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(urlPerfil)}`;
+
+      zonaImpresion.innerHTML = ''; // Limpiar zona
+
+      if (formato === 'a4') {
+        zonaImpresion.innerHTML = `
+          <div class="formato-a4">
+            <h1>${nombre}</h1>
+            <div class="rubro">${rubro}</div>
+            <img class="qr" src="${urlQR}" alt="Código QR">
+            <p class="cta">¡Escaneá el código para ver mis trabajos y contactarme!</p>
+          </div>
+        `;
+      } 
+      else if (formato === 'tarjetas') {
+        let tarjetasHTML = '<div class="formato-tarjetas">';
+        // Generamos 10 tarjetas para llenar una hoja A4
+        for (let i = 0; i < 10; i++) {
+          tarjetasHTML += `
+            <div class="tarjeta">
+              <div class="tarjeta-info">
+                <h3>${nombre}</h3>
+                <p><strong>Rubro:</strong> ${rubro}</p>
+                <p style="margin-top: 8px;">Escaneá el QR para ver mi perfil de contacto y trabajos.</p>
+              </div>
+              <img class="qr" src="${urlQR}" alt="QR">
+            </div>
+          `;
+        }
+        tarjetasHTML += '</div>';
+        zonaImpresion.innerHTML = tarjetasHTML;
+      }
+
+      // Pequeño retardo para asegurar que la imagen del QR cargue antes de abrir la ventana de impresión
+      setTimeout(() => {
+        window.print();
+      }, 500);
+    }
+  </script>
+</body>
+</html>
