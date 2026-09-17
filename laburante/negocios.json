@@ -1,0 +1,33 @@
+{
+  "ejp_construcciones": {
+    "nombre": "EJP CONSTRUCCIONES",
+    "ubicacion": "Merlo - San Luis",
+    "whatsapp": "5492665304280",
+    "telefono": "2665304280",
+    "descripcion": "Somos una empresa constructora con experiencia...",
+    "servicios": [
+      "Modalidad llave en mano",
+      "Ampliaciones",
+      "Pintura",
+      "Agua y Cloacas"
+    ],
+    "logo": "https://lh3.googleusercontent.com/d/1myYRpc-enUZr8SC52QNZQaQBJ2clPCLa",
+    "galeria": [
+      "https://lh3.googleusercontent.com/d/1QCk12DAHhSrZieFvoiMrWaGNYyz0rO1C",
+      "https://lh3.googleusercontent.com/d/1ulVHetltNpkO6yNIdLmhKTuzuQweD_Nm",
+      "", 
+      "", 
+      "", 
+      ""
+    ],
+    "redes": {
+      "instagram": "https://instagram.com/tu_usuario",
+      "facebook": "",
+      "youtube": "",
+      "linkedin": "",
+      "tiktok": "",
+      "web": ""
+    },
+    "link_resenas": "https://script.google.com/macros/s/AKfycbxCFmvzjIRV9QzMO_ykfYLKGp3qhYpcXryP4fWinw62XOPBzhD7TRWj3HhYerPje_LWZg/exec"
+  }
+}
