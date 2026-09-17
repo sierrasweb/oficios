@@ -225,7 +225,7 @@
     <!-- Navegación -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="https://oficios.sierrasweb.com.ar" class="logo">Oficios<span>SierrasWeb</span></a>
+            <a href="https://laburando.sierrasweb.com.ar" class="logo">Laburando <span>SierrasWeb</span></a>
             
             <button id="theme-toggle-mobile" class="theme-toggle theme-toggle-mobile" style="display: none;" aria-label="Cambiar Tema">
                 <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -233,9 +233,9 @@
             </button>
 
             <ul class="nav-links">
-                <li><a href="https://oficios.sierrasweb.com.ar">Inicio</a></li>
-                <li><a href="https://oficios.sierrasweb.com.ar/categorias">Categorías</a></li>
-                <li><a href="https://oficios.sierrasweb.com.ar/formulario" class="btn-nav" target="_blank">Ofrecer mi Servicio</a></li>
+                <li><a href="https://laburando.sierrasweb.com.ar">Inicio</a></li>
+                <li><a href="https://laburando.sierrasweb.com.ar/categorias">Categorías</a></li>
+                <li><a href="https://laburando.sierrasweb.com.ar/formulario" class="btn-nav" target="_blank">Ofrecer mi Servicio</a></li>
                 <li>
                     <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar Tema">
                         <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -498,14 +498,14 @@
                             <div class="profile-main-card text-center py-5">
                                 <h2>Negocio no encontrado</h2>
                                 <p style="color: var(--text-gray);">El perfil solicitado no existe o el enlace es incorrecto.</p>
-                                <a href="https://oficios.sierrasweb.com.ar" class="btn btn-primary mt-3">Volver al inicio</a>
+                                <a href="https://laburando.sierrasweb.com.ar" class="btn btn-primary mt-3">Volver al inicio</a>
                             </div>`;
                         return;
                     }
 
                     // Título de la pestaña
                     if (negocio.nombre) {
-                        document.title = `${negocio.nombre} | Oficios Sierras Web`;
+                        document.title = `${negocio.nombre} | Laburando Sierras Web`;
                         document.querySelector('.profile-name').innerText = negocio.nombre;
                     }
 
