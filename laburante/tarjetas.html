@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Tarjetas | Sierras Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0284C7;
+            --text-dark: #0F172A;
+            --text-gray: #475569;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+        /* Controles de impresión */
+        .controles {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-imprimir {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        /* Grilla hoja A4 */
+        .hoja-a4 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Espacio de corte */
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            padding: 10mm;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Medida estándar de tarjeta personal (90x50 mm) */
+        .tarjeta {
+            width: 90mm;
+            height: 50mm;
+            border: 1px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5mm;
+            box-sizing: border-box;
+            background: #fff;
+        }
+
+        .datos {
+            width: 60%;
+        }
+        .datos h2 {
+            font-size: 14px;
+            margin: 0 0 5px 0;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+        .datos p {
+            font-size: 10px;
+            color: var(--text-gray);
+            margin: 2px 0;
+        }
+        .datos .marca {
+            font-size: 9px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .qr-container {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .qr-container p {
+            font-size: 8px;
+            font-weight: 600;
+            margin-top: 5px;
+            color: var(--text-dark);
+        }
+        
+        /* Ajustes específicos para cuando se presiona Imprimir */
+        @media print {
+            body { background: white; padding: 0; }
+            .controles { display: none; }
+            .hoja-a4 { box-shadow: none; padding: 0; }
+            .tarjeta { break-inside: avoid; border: 1px solid #ccc; } /* Borde para guiar el corte */
+        }
+    </style>
+    <!-- Librería para generar el QR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <div class="controles no-print">
+        <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Tarjetas</button>
+        <p style="color: #64748b; font-size: 14px;">Configura la impresora en tamaño A4, sin márgenes, y desactiva "Imprimir encabezados y pies de página".</p>
+    </div>
+
+    <div class="hoja-a4" id="contenedor-tarjetas">
+        <!-- Las tarjetas se generan acá por JavaScript -->
+    </div>
+
+    <script>
+        // DOMINIO BASE DE TU APLICACIÓN
+        const URL_BASE = "https://oficios.sierrasweb.com.ar/perfil.html?id=";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('negocios.json')
+                .then(response => response.json())
+                .then(data => {
+                    const contenedor = document.getElementById('contenedor-tarjetas');
+
+                    for (const id in data) {
+                        const negocio = data[id];
+                        
+                        // 1. Crear el contenedor de la tarjeta
+                        const tarjeta = document.createElement('div');
+                        tarjeta.className = 'tarjeta';
+                        
+                        // 2. URL específica para este negocio
+                        const linkPerfil = URL_BASE + id;
+
+                        // 3. Estructura HTML interna de la tarjeta
+                        tarjeta.innerHTML = `
+                            <div class="datos">
+                                <h2>${negocio.nombre}</h2>
+                                <p>📞 ${negocio.telefono}</p>
+                                <p>📍 ${negocio.ubicacion}</p>
+                                <p class="marca">Oficios Sierras Web</p>
+                            </div>
+                            <div class="qr-container">
+                                <div id="qr-${id}"></div>
+                                <p>Escaneá para ver mi perfil y dejar tu opinión</p>
+                            </div>
+                        `;
+                        
+                        contenedor.appendChild(tarjeta);
+
+                        // 4. Generar el código QR dentro del div correspondiente
+                        new QRCode(document.getElementById(`qr-${id}`), {
+                            text: linkPerfil,
+                            width: 70, // Tamaño en píxeles del QR
+                            height: 70,
+                            colorDark : "#000000",
+                            colorLight : "#ffffff",
+                            correctLevel : QRCode.CorrectLevel.M
+                        });
+                    }
+                })
+                .catch(error => console.error("Error cargando el JSON:", error));
+        });
+    </script>
+</body>
+</html>
