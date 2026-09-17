@@ -4,24 +4,34 @@
     "ubicacion": "Merlo - San Luis",
     "whatsapp": "5492665304280",
     "telefono": "2665304280",
-    "descripcion": "Somos una empresa constructora con experiencia...",
+    "descripcion": "Somos una empresa constructora con experiencia comprobable
+Nos encargamos de todo el proceso: desde el proyecto y la planificación, hasta la entrega final de tu casa, listas para habitar 
+Brindamos soluciones integrales en ampliaciones o refacciones de agua, cloaca, electricidad, pintura, ETC.
+Nuestro compromiso es la calidad, el cumplimiento de plazos, presupuestos claros, sin sorpresas, y un equipo de profesionales en cada rubro para garantizar un trabajo duradero y seguro",
     "servicios": [
       "Modalidad llave en mano",
       "Ampliaciones",
       "Pintura",
-      "Agua y Cloacas"
+      "Agua y Cloacas",
+      "Electricidad",
+      "Durlock",
+      "Carpinteria",
+      "Techos en general (Chapa, madera,loza, tejas, etc.)",
+      "Aire acondicionado",
+      "Heladeras",
+      "Camaras en frío"
     ],
     "logo": "https://lh3.googleusercontent.com/d/1myYRpc-enUZr8SC52QNZQaQBJ2clPCLa",
     "galeria": [
       "https://lh3.googleusercontent.com/d/1QCk12DAHhSrZieFvoiMrWaGNYyz0rO1C",
       "https://lh3.googleusercontent.com/d/1ulVHetltNpkO6yNIdLmhKTuzuQweD_Nm",
-      "", 
-      "", 
-      "", 
+      "https://lh3.googleusercontent.com/d/186pgdMrGuWxkU-nOr8kkXfOgEyimCNXG", 
+      "https://lh3.googleusercontent.com/d/1wU-WLbb-XEfygOMcHH6r7nADHQ9dbdVj", 
+      "https://lh3.googleusercontent.com/d/1GOap0DzE0HgTUvSINa6BqJZz-Z_iK_Sk", 
       ""
     ],
     "redes": {
-      "instagram": "https://instagram.com/tu_usuario",
+      "instagram": "",
       "facebook": "",
       "youtube": "",
       "linkedin": "",
