@@ -22,9 +22,9 @@
     "galeria": [
       "https://lh3.googleusercontent.com/d/1QCk12DAHhSrZieFvoiMrWaGNYyz0rO1C",
       "https://lh3.googleusercontent.com/d/1ulVHetltNpkO6yNIdLmhKTuzuQweD_Nm",
-      "https://lh3.googleusercontent.com/d/186pgdMrGuWxkU-nOr8kkXfOgEyimCNXG", 
-      "https://lh3.googleusercontent.com/d/1wU-WLbb-XEfygOMcHH6r7nADHQ9dbdVj", 
-      "https://lh3.googleusercontent.com/d/1GOap0DzE0HgTUvSINa6BqJZz-Z_iK_Sk", 
+      "https://lh3.googleusercontent.com/d/186pgdMrGuWxkU-nOr8kkXfOgEyimCNXG",
+      "https://lh3.googleusercontent.com/d/1wU-WLbb-XEfygOMcHH6r7nADHQ9dbdVj",
+      "https://lh3.googleusercontent.com/d/1GOap0DzE0HgTUvSINa6BqJZz-Z_iK_Sk",
       ""
     ],
     "redes": {
@@ -36,5 +36,30 @@
       "web": ""
     },
     "link_resenas": "https://script.google.com/macros/s/AKfycbxCFmvzjIRV9QzMO_ykfYLKGp3qhYpcXryP4fWinw62XOPBzhD7TRWj3HhYerPje_LWZg/exec"
+  },
+  "sierrasweb": {
+    "nombre": "Sierras Web",
+    "ubicacion": "Carpinteria - San Luis",
+    "whatsapp": "5492664212722",
+    "telefono": "2664212722",
+    "descripcion": "Soluciones digitales",
+    "servicios": [
+      "Paginas web",
+      "Desarrollo digital",
+      "Software"
+    ],
+    "logo": "",
+    "galeria": [
+      ""
+    ],
+    "redes": {
+      "instagram": "",
+      "facebook": "",
+      "youtube": "",
+      "linkedin": "",
+      "tiktok": "",
+      "web": ""
+    },
+    "link_resenas": ""
   }
 }
