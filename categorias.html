@@ -46,7 +46,6 @@
         * { font-family: 'Inter', sans-serif; }
         body { color: var(--text-dark); background-color: var(--bg-light); transition: all var(--transition-speed); }
         
-        /* Personalización del Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-light); }
         ::-webkit-scrollbar-thumb { background: var(--pattern-color); border-radius: 10px; }
@@ -73,7 +72,7 @@
         .page-section { padding: 120px 0 60px; background-image: radial-gradient(var(--pattern-color) 1.5px, transparent 1.5px); background-size: 35px 35px; min-height: 100vh; }
         .wrap-container { max-width: 1000px; margin: 0 auto; }
 
-        /* Filtro y Select Mejorado */
+        /* Filtro y Select */
         .filter-box { background: var(--white); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); margin-bottom: 30px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;}
         .form-control { background-color: var(--bg-light); border: 1px solid var(--border-color); color: var(--text-dark); padding: 12px 20px; border-radius: 12px; transition: all 0.3s;}
         
@@ -90,7 +89,28 @@
         .form-select:focus, .form-control:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px var(--primary-light); color: var(--text-dark); background-color: var(--white);}
         .form-select:hover, .form-control:hover { border-color: var(--primary-color); }
         
-        /* GRID DE PROFESIONALES (2 por fila) */
+        /* Botón Filtro Favoritos */
+        .btn-fav-filter {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-fav-filter:hover { border-color: #ef4444; color: #ef4444; }
+        .btn-fav-filter.active {
+            background-color: #ef4444;
+            color: white;
+            border-color: #ef4444;
+        }
+
+        /* GRID DE PROFESIONALES */
         #professionalsContainer {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -99,14 +119,36 @@
 
         /* Cards Profesionales */
         .pro-card {
+            position: relative;
             background: var(--white); border-radius: 16px; padding: 20px; border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm); display: flex; gap: 20px; align-items: flex-start;
             text-decoration: none; color: inherit; transition: all 0.3s ease; height: 100%;
         }
         .pro-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--primary-light); }
         
+        /* Botón de Favorito en Tarjeta */
+        .favorite-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #ef4444;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, background-color 0.2s;
+            z-index: 10;
+        }
+        .favorite-btn:hover { transform: scale(1.15); }
+
         .pro-img { width: 100px; height: 100px; border-radius: 16px; object-fit: cover; flex-shrink: 0; background-color: var(--bg-light);}
-        .pro-info { flex-grow: 1; }
+        .pro-info { flex-grow: 1; padding-right: 25px; }
         
         .pro-title { font-size: 1.15rem; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
         .pro-subtitle { font-size: 0.95rem; color: var(--text-gray); margin-bottom: 8px; }
@@ -119,7 +161,6 @@
         .pro-location { font-size: 0.9rem; color: var(--text-gray); margin-bottom: 12px; }
         .pro-location i { color: var(--primary-color); margin-right: 5px; }
 
-        /* Estilo de etiquetas Sierras Web */
         .pro-tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .pro-tag { 
             background: var(--primary-light); color: var(--primary-dark); border: 1px solid rgba(2, 132, 199, 0.2);
@@ -127,7 +168,6 @@
         }
         [data-theme="dark"] .pro-tag { background: rgba(2, 132, 199, 0.2); border-color: rgba(2, 132, 199, 0.4); color: #38bdf8;}
 
-        /* Botón de ver más etiquetas */
         .btn-more-tags {
             background: var(--text-gray) !important;
             color: var(--bg-light) !important;
@@ -141,13 +181,14 @@
             transform: scale(1.05);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .theme-toggle-mobile { display: flex !important; position: absolute; right: 20px; top: 19px; }
             
             #professionalsContainer { grid-template-columns: 1fr; }
             .pro-card { flex-direction: column; align-items: center; text-align: center; }
+            .pro-info { padding-right: 0; }
+            .favorite-btn { top: 12px; right: 12px; }
             .pro-tags { justify-content: center; }
         }
     </style>
@@ -211,12 +252,16 @@
                 <div>
                     <select id="categoryFilter" class="form-select">
                         <option value="todas">Todas las categorías</option>
-                        <!-- Las categorías se cargarán aquí automáticamente -->
                     </select>
+                </div>
+                <div>
+                    <button id="favFilterBtn" class="btn-fav-filter" type="button" onclick="toggleFavoritesFilter()">
+                        <i class="far fa-heart"></i> Favoritos
+                    </button>
                 </div>
             </div>
 
-            <!-- Contenedor de Tarjetas (Grid) -->
+            <!-- Contenedor de Tarjetas -->
             <div id="professionalsContainer">
                 <div class="text-center py-5" style="grid-column: 1 / -1;">
                     <div class="spinner-border" style="color: var(--primary-color);" role="status"></div>
@@ -253,9 +298,44 @@
         document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
         document.getElementById('theme-toggle-mobile').addEventListener('click', toggleTheme);
 
-        // --- CONEXIÓN CON GOOGLE SHEETS PARA CARGAR DIRECTORIO ---
+        // --- CONEXIÓN CON GOOGLE SHEETS ---
         const GOOGLE_DIR_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSDTjdSgZ9insjY-Z2VLz28yxnsjbl0bkx1eRq-mpCpInfU_O0UBaoguM6gj_W9JgPCA/exec';
         let allProfessionals = []; 
+        let favoriteOnly = false;
+
+        // --- LÓGICA DE FAVORITOS ---
+        function getFavorites() {
+            return JSON.parse(localStorage.getItem('fav_businesses') || '[]');
+        }
+
+        function toggleFavorite(event, negocioName) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            let favs = getFavorites();
+            if (favs.includes(negocioName)) {
+                favs = favs.filter(item => item !== negocioName);
+            } else {
+                favs.push(negocioName);
+            }
+            localStorage.setItem('fav_businesses', JSON.stringify(favs));
+            filterData();
+        }
+
+        function toggleFavoritesFilter() {
+            favoriteOnly = !favoriteOnly;
+            const btn = document.getElementById('favFilterBtn');
+            const icon = btn.querySelector('i');
+            
+            if (favoriteOnly) {
+                btn.classList.add('active');
+                icon.className = 'fas fa-heart';
+            } else {
+                btn.classList.remove('active');
+                icon.className = 'far fa-heart';
+            }
+            filterData();
+        }
 
         function loadDirectory() {
             fetch(GOOGLE_DIR_SCRIPT_URL)
@@ -282,32 +362,32 @@
                 return;
             }
 
+            const favorites = getFavorites();
             let html = '';
+
             professionals.forEach(pro => {
+                const isFav = favorites.includes(pro.negocio);
+                const heartClass = isFav ? 'fas fa-heart' : 'far fa-heart';
                 
-                // --- ETIQUETAS DE CATEGORÍAS (Desplegables) ---
                 let tagsHtml = '';
                 if(pro.categorias) {
                     const tags = pro.categorias.split(',');
-                    const maxTags = 2; // Mostrar solo 2 inicialmente
+                    const maxTags = 2;
                     
                     tags.forEach((tag, index) => {
                         if (index < maxTags) {
                             tagsHtml += `<span class="pro-tag">${tag.trim()}</span>`;
                         } else {
-                            // Las extras se renderizan pero ocultas (display: none)
                             tagsHtml += `<span class="pro-tag extra-tag" style="display: none;">${tag.trim()}</span>`;
                         }
                     });
                     
                     if (tags.length > maxTags) {
                         const extraCount = tags.length - maxTags;
-                        // Botón que al hacer clic revela las demás. El preventDefault() evita que nos lleve al link del perfil
                         tagsHtml += `<span class="pro-tag btn-more-tags" onclick="event.preventDefault(); this.style.display='none'; const extras = this.parentNode.querySelectorAll('.extra-tag'); extras.forEach(el => el.style.display='');">+${extraCount} más</span>`;
                     }
                 }
 
-                // --- LÓGICA DE ESTRELLAS CONDICIONAL ---
                 let ratingHtml = '';
                 if (pro.opiniones && pro.puntos && parseFloat(pro.puntos) > 0) {
                     let rating = Math.round(parseFloat(pro.puntos));
@@ -326,9 +406,13 @@
 
                 let profileUrl = pro.url ? pro.url : '#';
                 let imgUrl = pro.foto ? pro.foto : `https://ui-avatars.com/api/?name=${pro.negocio}&background=random`;
+                const cleanNegocioName = pro.negocio.replace(/'/g, "\\'");
 
                 html += `
                 <a href="${profileUrl}" class="pro-card">
+                    <button type="button" class="favorite-btn" onclick="toggleFavorite(event, '${cleanNegocioName}')" title="${isFav ? 'Quitar de favoritos' : 'Guardar en favoritos'}">
+                        <i class="${heartClass}"></i>
+                    </button>
                     <img src="${imgUrl}" alt="${pro.negocio}" class="pro-img">
                     <div class="pro-info">
                         <h3 class="pro-title">${pro.negocio}</h3>
@@ -367,16 +451,16 @@
             });
         }
 
-        // --- LÓGICA DE FILTROS ---
+        // --- FILTROS Y BÚSQUEDA ---
         document.getElementById('searchInput').addEventListener('input', filterData);
         document.getElementById('categoryFilter').addEventListener('change', filterData);
 
         function filterData() {
             const searchText = document.getElementById('searchInput').value.toLowerCase();
             const categorySelect = document.getElementById('categoryFilter').value;
+            const favorites = getFavorites();
 
             const filtered = allProfessionals.filter(pro => {
-                // Ahora busca en negocio, en nombre Y en categorias
                 const textMatch = (pro.negocio && pro.negocio.toLowerCase().includes(searchText)) || 
                                   (pro.nombre && pro.nombre.toLowerCase().includes(searchText)) ||
                                   (pro.categorias && pro.categorias.toLowerCase().includes(searchText));
@@ -386,7 +470,12 @@
                     catMatch = pro.categorias && pro.categorias.toLowerCase().includes(categorySelect);
                 }
 
-                return textMatch && catMatch;
+                let favMatch = true;
+                if(favoriteOnly) {
+                    favMatch = favorites.includes(pro.negocio);
+                }
+
+                return textMatch && catMatch && favMatch;
             });
 
             renderCards(filtered);
